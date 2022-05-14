@@ -16,13 +16,12 @@ const server = async() => {
 
         console.log("Entered into the server...");
 
-        await mongoose.connect(MONGO_URI);
-        //await mongoose.connect(MONGO_URI, { 
-        //    useNewUrlParser: true, 
-        //    useUnifiedTopology:true, 
+        await mongoose.connect(MONGO_URI, { 
+            useNewUrlParser: true, 
+            useUnifiedTopology:true, 
         //    useCreateIndex:true, 
         //    useFindAndModify: false 
-        //});
+        });
         console.log('MongDB connected')
         // 미들웨어
         app.use(express.json());
