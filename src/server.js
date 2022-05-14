@@ -11,6 +11,9 @@ const { MONGO_URI } = process.env;
 
 const server = async() => {
     try {
+        const { MONGO_URI, PORT } = process.env;
+        if (!PORT) throw new Error("PORT is requrired");
+
         await mongoose.connect(MONGO_URI, { 
             useNewUrlParser: true, 
             useUnifiedTopology:true, 
@@ -25,7 +28,7 @@ const server = async() => {
         app.use('/blog', blogRouter);
         
         // 받는 곳
-        app.listen(3000, () =>  console.log('server listening on port 3000'))
+        app.listen(PORT, async () =>  console.log(`server listening on port ${PORT}`))
     } catch(err) {
         console.log(err);
     }
