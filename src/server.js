@@ -6,12 +6,13 @@ const mongoose = require('mongoose');
 
 const users = [];
 
-const { MONGO_URI } = process.env;
 //const MONGO_URI = 'mongodb+srv://lsyun1234:cxMctvVx5ThVlktM@joinusmembers.dvefm.mongodb.net/JoinUs?retryWrites=true&w=majority';
 
 const server = async() => {
     try {
         const { MONGO_URI, PORT } = process.env;
+        if (!MONGO_URI) console.err("MONGO_URI is required!!!");
+
         if (!PORT) throw new Error("PORT is requrired");
 
         await mongoose.connect(MONGO_URI, { 
