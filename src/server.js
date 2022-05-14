@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 
 const users = [];
 
-const MONGO_URI = 'mongodb+srv://lsyun1234:cxMctvVx5ThVlktM@joinusmembers.dvefm.mongodb.net/JoinUs?retryWrites=true&w=majority';
-//const MONGO_URI = 'mongodb+srv://lsyun1234:cxMctvVx5ThVlktM@joinusmembers.dvefm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const { MONGO_URI } = process.env;
+//const MONGO_URI = 'mongodb+srv://lsyun1234:cxMctvVx5ThVlktM@joinusmembers.dvefm.mongodb.net/JoinUs?retryWrites=true&w=majority';
 
 const server = async() => {
     try {
