@@ -16,10 +16,10 @@ const server = async() => {
         if (!PORT) throw new Error("PORT is requrired");
 
         await mongoose.connect(MONGO_URI, { 
-            useNewUrlParser: true, 
-            useUnifiedTopology:true, 
-            useCreateIndex:true, 
-            useFindAndModify: false 
+        //    useNewUrlParser: true, 
+        //    useUnifiedTopology:true, 
+        //    useCreateIndex:true, 
+        //    useFindAndModify: false 
         });
         console.log('MongDB connected')
         // 미들웨어
