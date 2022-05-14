@@ -12,15 +12,17 @@ const server = async() => {
     try {
         const { MONGO_URI, PORT } = process.env;
         if (!MONGO_URI) console.err("MONGO_URI is required!!!");
-
         if (!PORT) throw new Error("PORT is requrired");
 
-        await mongoose.connect(MONGO_URI, { 
-            useNewUrlParser: true, 
-            useUnifiedTopology:true, 
+        console.log("Entered into the server...");
+
+        await mongoose.connect(MONGO_URI);
+        //await mongoose.connect(MONGO_URI, { 
+        //    useNewUrlParser: true, 
+        //    useUnifiedTopology:true, 
         //    useCreateIndex:true, 
         //    useFindAndModify: false 
-        });
+        //});
         console.log('MongDB connected')
         // 미들웨어
         app.use(express.json());
