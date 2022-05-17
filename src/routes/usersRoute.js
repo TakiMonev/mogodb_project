@@ -5,7 +5,7 @@ const { Users } = require('../models/Users')
 
 userRouter.get('/', async(req, res) => {
     try {
-        const users = await User.find({});
+        const users = await Users.find({});
         return res.send({ users });
     } catch(err) {
         console.log(err);
@@ -18,8 +18,8 @@ userRouter.get('/:userId', async(req, res) => {
     try {
         const { userId } = req.params;
         if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid userId" })
-        const user = await User.findOne({ _id: userId });
-        return res.send({ user });
+        const users = await Users.findOne({ _id: userId });
+        return res.send({ users });
     } catch (err) {
         console.log(err);
         return res.status(500).send({ err: err.message })
