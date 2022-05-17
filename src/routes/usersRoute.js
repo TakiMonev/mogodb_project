@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const userRouter = Router();
 const mongoose = require("mongoose");
-const { Users } = require('../models/Users')
+const { Users } = require('../models/Users');
 
 userRouter.get('/', async(req, res) => {
     try {
@@ -12,19 +12,6 @@ userRouter.get('/', async(req, res) => {
         return res.status(500).send({ err: err.message });
     }
 });
-
-// /user/:userId -> :userId을 통해 변수명을 받음
-userRouter.get('/:userId', async(req, res) => {
-    try {
-        const { userId } = req.params;
-        if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid userId" })
-        const users = await Users.findOne({ _id: userId });
-        return res.send({ users });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send({ err: err.message })
-    }
-})
 
 userRouter.post('/', async (req, res) => {
     try {
