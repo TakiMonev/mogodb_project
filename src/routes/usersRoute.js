@@ -6,8 +6,8 @@ const { Users } = require('../models/Users');
 console.log("usersRoute page\n");
 usersRouter.get('/', async(req, res) => {
     try {
-        const all_users = await Users.find({});
-        return res.send({ all_users });
+        const users = await Users.find({});
+        return res.send({ users });
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });

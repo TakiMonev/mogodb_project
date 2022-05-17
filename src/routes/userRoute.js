@@ -3,6 +3,7 @@ const userRouter = Router();
 const mongoose = require("mongoose");
 const { User } = require('../models/User');
 
+console.log("userRoute page\n");
 userRouter.get('/', async(req, res) => {
     try {
         const users = await User.find({});
