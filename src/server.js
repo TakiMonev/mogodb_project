@@ -16,7 +16,7 @@ const server = async() => {
         if (!MONGO_URI) console.err("MONGO_URI is required!!!");
         if (!PORT) throw new Error("PORT is requrired");
 
-        console.log("Entered into the server...");
+        console.log("Entered into the server!");
 
         await mongoose.connect(MONGO_URI, { 
             useNewUrlParser: true, 
