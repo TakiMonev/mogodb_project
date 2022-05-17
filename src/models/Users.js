@@ -10,8 +10,8 @@ const UserSchema = new Schema({
     mem_type: String
 }, { timestamps: true })    // timestamps = 옵션
 
-const User = model('user', UserSchema);
-module.exports = { User };
+const Users = model('users', UserSchema);
+module.exports = { Users };
 
 /*
 String mem_p // 회원 기본키
