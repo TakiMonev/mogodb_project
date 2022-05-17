@@ -2,8 +2,8 @@ const { Schema, model } = require('mongoose');  // 원래는 mongoose = require(
                                                 // mongoose.Schema, mongoose.model <- 이런식으로 했음
 
 const UserSchema = new Schema({
-    mem_p: { type: String, required: ture },
-    mem_id: { type: String, required: true },
+    mem_p:  String,
+    mem_id: String,
     mem_pw: String,
     mem_name: String,
     mem_company: String,
