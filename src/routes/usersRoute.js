@@ -3,9 +3,9 @@ const usersRouter = Router();
 const mongoose = require("mongoose");
 const { Users } = require('../models/Users');
 
-console.log("usersRoute page\n");
 usersRouter.get('/', async(req, res) => {
     try {
+        console.log('usersRoute page');
         const users = await Users.find({});
         return res.send({ users });
     } catch(err) {
@@ -16,6 +16,7 @@ usersRouter.get('/', async(req, res) => {
 
 usersRouter.post('/', async (req, res) => {
     try {
+        console.log("posting information in usersRouter");
         let { mem_p, mem_id, mem_pw, mem_name, mem_company, mem_type } = req.body;
         console.log("mem_p : " + mem_p + "\n");
 

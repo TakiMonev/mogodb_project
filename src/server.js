@@ -5,7 +5,8 @@ const { blogRouter } = require('./routes/blogRoute');
 const { usersRouter } = require('./routes/usersRoute');
 const mongoose = require('mongoose');
 
-const users = [];
+// const users = [];
+// const all_users = [];
 
 //const MONGO_URI = 'mongodb+srv://lsyun1234:cxMctvVx5ThVlktM@joinusmembers.dvefm.mongodb.net/JoinUs?retryWrites=true&w=majority';
 
