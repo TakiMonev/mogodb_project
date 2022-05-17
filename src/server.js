@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const { userRouter } = require('./routes/userRoute');
 const { blogRouter } = require('./routes/blogRoute');
+const { usersRouter } = require('./routes/usersRoute');
 const mongoose = require('mongoose');
 
 const users = [];
@@ -27,6 +28,7 @@ const server = async() => {
         app.use(express.json());
 
         app.use('/user', userRouter);
+        app.use('/users', usersRouter);
         app.use('/blog', blogRouter);
         
         // 받는 곳

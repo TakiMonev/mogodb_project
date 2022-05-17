@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     mem_pw: String,
     mem_name: String,
     mem_company: String,
+    mem_type: String
 }, { timestamps: true })    // timestamps = 옵션
 
 const User = model('user', UserSchema);
