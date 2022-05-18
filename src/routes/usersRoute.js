@@ -2,6 +2,8 @@ const { Router } = require('express');
 const usersRouter = Router();
 const mongoose = require("mongoose");
 const { Users } = require('../models/Users');
+const { MongoClient } = require("mongodb");
+const client = new MongoClient("mongodb+srv://lsyun1234:cxMctvVx5ThVlktM@joinusmembers.dvefm.mongodb.net/JoinUs?retryWrites=true&w=majority");
 
 usersRouter.get('/', async(req, res) => {
     try {
@@ -22,6 +24,13 @@ usersRouter.post('/', async (req, res) => {
 
         const users = new Users(req.body);
         await users.save();
+        // 0518 added
+        await client.connect();
+        const database = client.db("mongoDB");
+        const UsersData = database.collection("users");
+        const result = await UsersData.insertOne(users);
+        console.log(`A document was inserted with the _id: ${result.insertedId}`);
+        //
         return res.send({ users });
     } catch(err) {
         console.log(err);
