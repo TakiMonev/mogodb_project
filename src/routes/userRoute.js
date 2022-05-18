@@ -29,6 +29,7 @@ userRouter.get('/:userId', async(req, res) => {
 
 userRouter.post('/', async (req, res) => {
     try {
+        console.log("Entered to POST...");
         let { username, name } = req.body;
         if (!username) return res.status(400).send({ err: "username is required" });
         if (!name || !name.first || !name.last) return res.status(400).send({ err: "Both first and last names are required!" });
