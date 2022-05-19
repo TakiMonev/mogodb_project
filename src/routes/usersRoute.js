@@ -3,6 +3,7 @@ const usersRouter = Router();
 const mongoose = require("mongoose");
 const { Users } = require('../models/Users');
 const { MongoClient } = require("mongodb");
+const { param } = require('express/lib/request');
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
 
@@ -25,22 +26,23 @@ usersRouter.post('/', async (req, res) => {
 
         const users = new Users(req.body);
         await users.save();
-        // 0518 added
-        /*
-        await client.connect();
-        const database = client.db("JoinUs");
-
-        console.log("Database Connected\n");
-        const UsersData = database.collection("users");
-
-        console.log("UsersData added!");
-        const result = await UsersData.insertOne(users);
-        console.log(`A document was inserted with the _id: ${result.insertedId}`);
-        */
-        //
+        
         return res.send({ users });
 
         
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
+});
+
+usersRouter.delete('/:userId', async(req, res) => {
+    try {
+        const { userId } = req.params;
+        
+        if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid userId" })
+        const user = await Users.findOneAndDelete({ _id: userId });
+        return res.send({ user });
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });
