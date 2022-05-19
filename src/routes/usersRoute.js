@@ -26,13 +26,17 @@ usersRouter.post('/', async (req, res) => {
         const users = new Users(req.body);
         await users.save();
         // 0518 added
+        /*
         await client.connect();
         const database = client.db("JoinUs");
+
         console.log("Database Connected\n");
         const UsersData = database.collection("users");
+
         console.log("UsersData added!");
         const result = await UsersData.insertOne(users);
         console.log(`A document was inserted with the _id: ${result.insertedId}`);
+        */
         //
         return res.send({ users });
 
