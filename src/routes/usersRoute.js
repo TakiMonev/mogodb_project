@@ -48,11 +48,11 @@ usersRouter.delete('/:userId', async(req, res) => {
         const UsersData = database.collection("users");
         const userresult = await UsersData.findOneAndDelete({ mem_id: userId })
         //const result = await delete UsersData.deleteOne({ mem_id: userId });
-        if (!result) return res.status(400).send({ err: "invalid userId" });
+        if (!userresult) return res.status(400).send({ err: "invalid userId" });
         
         console.log(`A document was deleted with the _id: ${ UsersData.findOne(mem_id) }`);
         
-        return res.send({ result });
+        return res.send({ userresult });
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });
