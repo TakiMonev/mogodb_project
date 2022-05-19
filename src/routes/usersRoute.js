@@ -40,6 +40,7 @@ usersRouter.delete('/:userId', async(req, res) => {
     try {
         const { userId } = req.params;
         
+        console.log("Found the user's ID")
         if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid userId" })
         const user = await Users.findOneAndDelete({ _id: userId });
         return res.send({ user });
