@@ -41,10 +41,18 @@ usersRouter.delete('/:userId', async(req, res) => {
         const { userId } = req.params;
         
         console.log("Found the user's ID : " + JSON.stringify(userId) + "\n");
+        //console.log(client);
 
-        if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid userId" })
-        const user = await Users.findOneAndDelete({ mem_id: userId });
-        return res.send({ user });
+        await client.connect();
+        const database = client.db("mongoDB");
+        const UsersData = database.collection("users");
+        const userresult = await UsersData.findOneAndDelete({ mem_id: userId })
+        //const result = await delete UsersData.deleteOne({ mem_id: userId });
+        if (!result) return res.status(400).send({ err: "invalid userId" });
+        
+        console.log(`A document was deleted with the _id: ${ UsersData.findOne(mem_id) }`);
+        
+        return res.send({ result });
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });
