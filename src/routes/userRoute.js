@@ -3,7 +3,6 @@ const userRouter = Router();
 const mongoose = require("mongoose");
 const { User } = require('../models/User');
 
-console.log("userRoute page\n");
 userRouter.get('/', async(req, res) => {
     try {
         const users = await User.find({});
@@ -13,19 +12,6 @@ userRouter.get('/', async(req, res) => {
         return res.status(500).send({ err: err.message });
     }
 });
-
-// /user/:userId -> :userId을 통해 변수명을 받음
-userRouter.get('/:userId', async(req, res) => {
-    try {
-        const { userId } = req.params;
-        if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid userId" })
-        const user = await User.findOne({ _id: userId });
-        return res.send({ user });
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send({ err: err.message })
-    }
-})
 
 userRouter.post('/', async (req, res) => {
     try {

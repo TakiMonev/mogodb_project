@@ -3,6 +3,7 @@ const app = express();
 const { userRouter } = require('./routes/userRoute');
 const { blogRouter } = require('./routes/blogRoute');
 const { usersRouter } = require('./routes/usersRoute');
+const { facilityRouter } = require('./routes/facilityRoute');
 const mongoose = require('mongoose');
 
 // const users = [];
@@ -29,8 +30,9 @@ const server = async() => {
         app.use(express.json());
 
         app.use('/user', userRouter);
-        app.use('/users', usersRouter);
         app.use('/blog', blogRouter);
+        app.use('/users', usersRouter);
+        app.use('/facility', facilityRouter);
         
         // 받는 곳
         app.listen(PORT, async () =>  console.log(`server listening on port ${PORT}`))
