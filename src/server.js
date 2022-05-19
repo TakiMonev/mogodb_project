@@ -25,7 +25,7 @@ const server = async() => {
         //    useCreateIndex:true, 
         //    useFindAndModify: false 
         });
-        console.log('MongDB connected')
+        console.log('MongDB connected!!!')
         // 미들웨어
         app.use(express.json());
 
