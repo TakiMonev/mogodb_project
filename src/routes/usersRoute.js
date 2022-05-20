@@ -1,11 +1,14 @@
-const { Router } = require('express');
-const usersRouter = Router();
+const express = require('express');
+const usersRouter = express.Router();
 const mongoose = require("mongoose");
 const { Users } = require('../models/Users');
 const { MongoClient } = require("mongodb");
 const { param } = require('express/lib/request');
+const { userRouter } = require('./userRoute');
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
+// 0520 added
+userRouter.use(express.json())
 
 usersRouter.get('/', async(req, res) => {
     try {
@@ -38,21 +41,12 @@ usersRouter.post('/', async (req, res) => {
 
 usersRouter.delete('/:userId', async(req, res) => {
     try {
-        const { userId } = req.params;
-        
+        const { userId } = req.params;   
         console.log("Found the user's ID : " + JSON.stringify(userId) + "\n");
-        //console.log(client);
-
-        await client.connect();
-        const database = client.db("mongoDB");
-        const UsersData = database.collection("users");
-        const userresult = await UsersData.findOneAndDelete({ mem_id: userId })
-        //const result = await delete UsersData.deleteOne({ mem_id: userId });
-        if (!userresult) return res.status(400).send({ err: "invalid userId" });
+        const usersData = Users.findOneAndDelete({ mem_id: userId })
+        //console.log("UserData : " + Users.findOne({ mem_id : userId }) + "\n");
         
-        console.log(`A document was deleted with the _id: ${ UsersData.findOne(mem_id) }`);
-        
-        return res.send({ userresult });
+        return res.send({ usersData });
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });
