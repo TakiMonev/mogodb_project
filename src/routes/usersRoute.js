@@ -43,7 +43,7 @@ usersRouter.delete('/:userId', async(req, res) => {
     try {
         const { userId } = req.params;   
         console.log("Found the user's ID : " + JSON.stringify(userId) + "\n");
-        const usersData = Users.findOneAndDelete({ mem_id: userId })
+        const usersData = await Users.findOneAndDelete({ mem_id: userId })
         //console.log("UserData : " + Users.findOne({ mem_id : userId }) + "\n");
         
         return res.send({ usersData });
