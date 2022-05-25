@@ -16,10 +16,10 @@ facilityRouter.get('/', async(req, res) => {
     }
 });
 
-facilityRouter.delete('/:facilityName/:ceoName:', async(req, res) => {
+facilityRouter.delete('/:facilityName/:ceoName', async(req, res) => {
     try {
-        const { facilityName } = req.params;
-        const { ceoName } = req.params;
+        const { facilityName } = req.params.facilityName;
+        const { ceoName } = req.params.ceoName;
         //if (!mongoose.isValidObjectId(facilityName)) return res.status(400).send({ err: "invalid facilityId" })
         
         console.log("Found the facility name : " + JSON.stringify(facilityName) + "\n");
