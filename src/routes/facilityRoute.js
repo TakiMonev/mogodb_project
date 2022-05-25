@@ -8,7 +8,7 @@ const client = new MongoClient(MONGO_URI);
 
 facilityRouter.get('/', async(req, res) => {
     try {
-        const facility = await Facility.find({});
+        const facility = await facility.find({});
         return res.send({ facility });
     } catch(err) {
         console.log(err);
