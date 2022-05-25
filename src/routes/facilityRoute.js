@@ -3,9 +3,11 @@ const facilityRouter = express.Router();
 const mongoose = require("mongoose");
 const { Facility } = require('../models/Facility');
 const { MongoClient } = require("mongodb");
-const { facilityRouter } = require('./facilityRoute');
+const { facRouter } = require('./facilityRoute');
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
+
+facRouter.use(express.json());
 
 facilityRouter.get('/', async(req, res) => {
     try {

@@ -8,7 +8,7 @@ const { userRouter } = require('./userRoute');
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
 // 0520 added
-userRouter.use(express.json())
+userRouter.use(express.json());
 
 usersRouter.get('/', async(req, res) => {
     try {
