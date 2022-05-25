@@ -21,9 +21,9 @@ facilityRouter.delete('/:facilityName', async(req, res) => {
         const { facilityName } = req.params;
         //if (!mongoose.isValidObjectId(facilityName)) return res.status(400).send({ err: "invalid facilityId" })
         
-        console.log("Found the user's ID : " + JSON.stringify(facilityName) + "\n");
+        console.log("Found the facility name : " + JSON.stringify(facilityName) + "\n");
         
-        const facility = await Facility.findOne({ fac_title: facilityName });
+        const facility = await Facility.findOneAndDelete({ fac_title: facilityName });
         return res.send({ facility });
     } catch (err) {
         console.log(err);
