@@ -8,7 +8,7 @@ const client = new MongoClient(MONGO_URI);
 
 facilityRouter.get('/', async(req, res) => {
     try {
-        const facility = await facility.find({});
+        const facility = await Facility.find({});
         return res.send({ facility });
     } catch(err) {
         console.log(err);
@@ -37,6 +37,7 @@ facilityRouter.post('/', async (req, res) => {
 
         const facility = new Facility(req.body);
         await facility.save();
+
         // 0518 added
         await client.connect();
         const database = client.db("JoinUs");

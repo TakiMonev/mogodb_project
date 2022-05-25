@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <script>
+            function getImg()
+            {
+                var canvas = document.getElementById("mainCanvas");
+                var ctx = canvas.getContext("2d");
+
+                var img = new Image();
+                img.src = "/TopContentImg/img0.jpg";
+
+                img.onload = function () {
+                    ctx.drawImage(img,0,0);
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <header id="header" class="header">
+            <div class="heaer_wrap">
+                <h1 class="logo">
+                    <a id="firstImg" href="https://www.joins.ga">
+                        <script>getImg();</script>
+                        <img src="http://localhost:3000/TopContentImg">
+                        <p>pp</p>
+                    </a>
+                </h1>
+            </div>
+        </header>
+        <p>pppppppppppp</p>
+    </body>
+</html>

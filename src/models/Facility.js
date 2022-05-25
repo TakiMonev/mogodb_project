@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');  // 원래는 mongoose = require(
                                                 // mongoose.Schema, mongoose.model <- 이런식으로 했음
 
 const FacilitySchema = new Schema({
-    fac_p: String,          // 시설물 기본키
+    fac_p: String,          // 시설물 기본키 / 지역 번호 넣어야할듯
     fac_ceo: String,        // 사업주 ( member:mem_p값 입력 )
     fac_title: String,      // 사업장 정보 제목
     fac_info: String,       // 사업장 정보 내용

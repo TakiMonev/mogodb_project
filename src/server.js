@@ -6,6 +6,12 @@ const { usersRouter } = require('./routes/usersRoute');
 const { facilityRouter } = require('./routes/facilityRoute');
 const mongoose = require('mongoose');
 
+const { mainRouter } = require('./routes/mainRoute');
+const { topImgRouter } = require('./routes/topImgRoute')
+const http = require('http');
+const fs = require('fs'); 
+const path = require('path');
+
 // const users = [];
 // const all_users = [];
 
@@ -28,12 +34,15 @@ const server = async() => {
         console.log('MongDB connected!!!')
         // 미들웨어
         app.use(express.json());
+        app.use('/', mainRouter);
+        app.use('/TopContentImg', topImgRouter);
 
         app.use('/user', userRouter);
         app.use('/blog', blogRouter);
         app.use('/users', usersRouter);
         app.use('/facility', facilityRouter);
-        
+        //app.use(express.static(path.join(__dirname, 'public')));
+    
         // 받는 곳
         app.listen(PORT, async () =>  console.log(`server listening on port ${PORT}`))
     } catch(err) {
