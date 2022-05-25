@@ -18,9 +18,9 @@ facilityRouter.get('/', async(req, res) => {
 
 facilityRouter.get('/:facilityName', async(req, res) => {
     try {
-        const { userId } = req.params;
-        if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid facilityId" })
-        const facility = await Facility.findOne({ _id: userId });
+        const { facilityName } = req.params;
+        if (!mongoose.isValidObjectId(facilityName)) return res.status(400).send({ err: "invalid facilityId" })
+        const facility = await Facility.findOne({ fac_title: facilityName });
         return res.send({ facility });
     } catch (err) {
         console.log(err);
