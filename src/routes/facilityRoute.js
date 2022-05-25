@@ -16,15 +16,22 @@ facilityRouter.get('/', async(req, res) => {
     }
 });
 
-facilityRouter.delete('/:facilityName', async(req, res) => {
+facilityRouter.delete('/:facilityName/:ceoName:', async(req, res) => {
     try {
         const { facilityName } = req.params;
+        const { ceoName } = req.params;
         //if (!mongoose.isValidObjectId(facilityName)) return res.status(400).send({ err: "invalid facilityId" })
         
         console.log("Found the facility name : " + JSON.stringify(facilityName) + "\n");
-        
-        const facility = await Facility.findOneAndDelete({ fac_title: facilityName });
-        return res.send({ facility });
+
+        const checkFacility = await Facility.findOne({ fac_title: facilityName });
+        const checkCeo = await Facility.findOne({ fac_ceo: ceoName });
+
+        if (checkFacility.fac_ceo === ceoName && checkCeo.fac_title === facilityName)
+        {
+            const facility = await Facility.findOneAndDelete({ fac_title: facilityName });
+            return res.send({ facility });
+        }
     } catch (err) {
         console.log(err);
         return res.status(500).send({ err: err.message })
@@ -46,24 +53,6 @@ facilityRouter.post('/', async (req, res) => {
         return res.send({ facility });
 
         
-    } catch(err) {
-        console.log(err);
-        return res.status(500).send({ err: err.message });
-    }
-});
-
-facilityRouter.delete('/:facilityName', async(req, res) => {
-    try {
-        const { facilityName } = req.params;
-        
-        // 0520 에러 케이스 추가   
-        if (!mongoose.isValidObjectId(facilityName)) 
-            return res.status(400).send({ err: "Invalid facility" });
-
-        console.log("Found the facility : " + JSON.stringify(facilityName) + "\n");
-        const facilityData = await Facility.findOneAndDelete({ fac_title: facilityName });
-        
-        return res.send({ facilityData });
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });
