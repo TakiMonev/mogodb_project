@@ -16,26 +16,28 @@ facilityRouter.get('/', async(req, res) => {
     }
 });
 
-facilityRouter.delete('/:facilityName/:ceoName', async(req, res) => {
+facilityRouter.post('/deleteFac', async(req, res) => {
     try {
-        const { facilityName } = req.params.facilityName;
-        const { ceoName } = req.params.ceoName;
+        // const facilityName = req.body.facilityName와 동일
+        const { facilityName } = req.body
+        const { ceoName } = req.body
         //if (!mongoose.isValidObjectId(facilityName)) return res.status(400).send({ err: "invalid facilityId" })
         
         console.log("Found the facility name : " + JSON.stringify(facilityName) + "\n");
 
-        const checkFacility = await Facility.findOne({ fac_title: facilityName });
-        const checkCeo = await Facility.findOne({ fac_ceo: ceoName });
+        const checkFacility = await Facility.findOne({ fac_title: facilityName, fac_ceo: ceoName });
 
-        if (checkFacility.fac_ceo === ceoName && checkCeo.fac_title === facilityName)
-        {
+        if (checkFacility)
+        {   
             const facility = await Facility.findOneAndDelete({ fac_title: facilityName });
             console.log("Data Deleted");
-            return res.send({ facility });
+            res.send({ facility });
         }
+        res.send("fac not found");
+
     } catch (err) {
         console.log(err);
-        return res.status(500).send({ err: err.message })
+        res.status(500).send({ err: err.message })
     }
 });
 
