@@ -31,10 +31,10 @@ facilityRouter.post('/deleteFac', async(req, res) => {
         {   
             const facility = await Facility.findOneAndDelete({ fac_title: facilityName });
             console.log("Data Deleted");
-            res.writeHead(201);
             res.status(201).send({ facility });
         }
-        res.send("Facility not found");
+        else
+            res.send("Facility not found");
 
     } catch (err) {
         console.log(err);
