@@ -7,8 +7,6 @@ const { facRouter } = require('./facilityRoute');
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
 
-facRouter.use(express.json());
-
 facilityRouter.get('/', async(req, res) => {
     try {
         const facility = await facility.find({});
