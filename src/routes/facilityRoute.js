@@ -30,6 +30,7 @@ facilityRouter.delete('/:facilityName/:ceoName:', async(req, res) => {
         if (checkFacility.fac_ceo === ceoName && checkCeo.fac_title === facilityName)
         {
             const facility = await Facility.findOneAndDelete({ fac_title: facilityName });
+            console.log("Data Deleted");
             return res.send({ facility });
         }
     } catch (err) {
