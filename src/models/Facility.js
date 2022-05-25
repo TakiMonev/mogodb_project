@@ -10,8 +10,8 @@ const FacilitySchema = new Schema({
     fac_clicked: String     // 조회수
 }, { timestamps: true })        // timestamps = 옵션
 
-const Facilitiy = model('facility', FacilitySchema);
-module.exports = { Facilitiy };
+const Facility = model('facility', FacilitySchema);
+module.exports = { Facility };
 
 /*
 String item_p // 시설물 기본키

@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 const { Users } = require('../models/Users');
 const { MongoClient } = require("mongodb");
 const { param } = require('express/lib/request');
-const { userRouter } = require('./userRoute');
+//const { userRouter } = require('./userRoute');
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
 // 0520 added
-userRouter.use(express.json());
+//userRouter.use(express.json());
 
 usersRouter.get('/', async(req, res) => {
     try {
