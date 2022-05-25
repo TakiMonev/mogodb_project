@@ -3,7 +3,6 @@ const facilityRouter = express.Router();
 const mongoose = require("mongoose");
 const { Facility } = require('../models/Facility');
 const { MongoClient } = require("mongodb");
-const { facRouter } = require('./facilityRoute');
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
 
