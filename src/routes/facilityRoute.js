@@ -16,7 +16,7 @@ facilityRouter.get('/', async(req, res) => {
     }
 });
 
-facilityRouter.get('/:userId', async(req, res) => {
+facilityRouter.get('/:facilityName', async(req, res) => {
     try {
         const { userId } = req.params;
         if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ err: "invalid facilityId" })
@@ -31,25 +31,36 @@ facilityRouter.get('/:userId', async(req, res) => {
 facilityRouter.post('/', async (req, res) => {
     try {
         console.log("posting information in facilityRouter");
-        let { mem_p, mem_id, mem_pw, mem_name, mem_company, mem_type } = req.body;
+        let { fac_p, fac_ceo, fac_title, fac_info, fac_max, fac_clicked } = req.body;
 
-        if (!mem_p || !mem_id || !mem_pw) return res.status(400).send({ err: "key, id, password are required" });
+        if (!fac_p || !fac_ceo || !fac_title || !fac_info || !fac_max)
+            return res.status(400).send({ err: "All informations are required" });
 
+        // 데이터베이스 facility에 저장
         const facility = new Facility(req.body);
         await facility.save();
-
-        // 0518 added
-        await client.connect();
-        const database = client.db("JoinUs");
-        console.log("Database Connected\n");
-        const FacData = database.collection("facility");
-        console.log("FacilityData added!");
-        const result = await FacData.insertOne(facility);
-        console.log(`A document was inserted with the _id: ${result.insertedId}`);
-        //
+        
         return res.send({ facility });
 
         
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
+});
+
+facilityRouter.delete('/:facilityName', async(req, res) => {
+    try {
+        const { facilityName } = req.params;
+        
+        // 0520 에러 케이스 추가   
+        if (!mongoose.isValidObjectId(facilityName)) 
+            return res.status(400).send({ err: "Invalid facility" });
+
+        console.log("Found the facility : " + JSON.stringify(fac_p) + "\n");
+        const facilityData = await Facility.findOneAndDelete({ mem_id: fac_p });
+        
+        return res.send({ facilityData });
     } catch(err) {
         console.log(err);
         return res.status(500).send({ err: err.message });

@@ -45,7 +45,7 @@ usersRouter.delete('/:userId', async(req, res) => {
         
         // 0520 에러 케이스 추가   
         if (!mongoose.isValidObjectId(userId)) 
-            return res.status(400).send({ err: "invalid userId" });
+            return res.status(400).send({ err: "Invalid userId" });
 
         console.log("Found the user's ID : " + JSON.stringify(userId) + "\n");
         const usersData = await Users.findOneAndDelete({ mem_id: userId });
