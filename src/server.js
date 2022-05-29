@@ -4,13 +4,15 @@ const { userRouter } = require('./routes/userRoute');
 const { blogRouter } = require('./routes/blogRoute');
 const { usersRouter } = require('./routes/usersRoute');
 const { facilityRouter } = require('./routes/facilityRoute');
+const { mainRouter } = require('./routes/mainRoute');
 const mongoose = require('mongoose');
 
-const { mainRouter } = require('./routes/mainRoute');
-const { topImgRouter } = require('./routes/topImgRoute')
+const ejs = require('ejs');
 const http = require('http');
 const fs = require('fs'); 
 const path = require('path');
+
+app.set('view engine', 'ejs');
 
 // const users = [];
 // const all_users = [];
@@ -35,7 +37,6 @@ const server = async() => {
         // 미들웨어
         app.use(express.json());
         app.use('/', mainRouter);
-        app.use('/TopContentImg', topImgRouter);
 
         app.use('/user', userRouter);
         app.use('/blog', blogRouter);
