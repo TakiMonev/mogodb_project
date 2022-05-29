@@ -10,7 +10,6 @@ var MongoClient = require('mongodb').MongoClient;
 
 const dirPath = path.join(__dirname, '../web');
 const express = require('express');
-const multer = require('multer');
 const mainRouter = express.Router();
 
 const ejs = require('ejs');
