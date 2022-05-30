@@ -50,7 +50,14 @@ facilityRouter.post('/', async (req, res) => {
         if (!fac_p || !fac_ceo || !fac_title || !fac_info || !fac_max)
             return res.status(400).send({ err: "All informations are required" });
 
-        // 아마도 이 코드가 데이터베이스에서 이 틀로 쓰여진 데이터를 가져온다는 뜻인듯
+        console.log(Facility.findById({ "fac_p": fac_p }, function(err, data) {
+            if (err) 
+                return console.log("Facility key already exists");
+        }));
+        
+        // If you use findOne(), you'll see that findOne(undefined) and findOne({ _id: undefined }) are equivalent 
+        //to findOne({}) and return arbitrary documents.
+        // However, mongoose translates findById(undefined) into findOne({ _id: null }).
         //if (Facility.findOne(fac_p))
         //    return res.status(400).send({ err: "Facility key already exists"});
 
