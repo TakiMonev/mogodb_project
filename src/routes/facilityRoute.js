@@ -50,8 +50,9 @@ facilityRouter.post('/', async (req, res) => {
         if (!fac_p || !fac_ceo || !fac_title || !fac_info || !fac_max)
             return res.status(400).send({ err: "All informations are required" });
 
-        if (Facility.findOne(fac_p))
-            return res.status(400).send({ err: "Facility key already exists"});
+        // 아마도 이 코드가 데이터베이스에서 이 틀로 쓰여진 데이터를 가져온다는 뜻인듯
+        //if (Facility.findOne(fac_p))
+        //    return res.status(400).send({ err: "Facility key already exists"});
 
         // 데이터베이스 facility에 저장
         const facility = new Facility(req.body);
