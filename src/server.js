@@ -5,6 +5,7 @@ const { blogRouter } = require('./routes/blogRoute');
 const { usersRouter } = require('./routes/usersRoute');
 const { facilityRouter } = require('./routes/facilityRoute');
 const { mainRouter } = require('./routes/mainRoute');
+const { reviewRouter } = require('./routes/reviewRoute');
 const mongoose = require('mongoose');
 
 const ejs = require('ejs');
@@ -42,6 +43,7 @@ const server = async() => {
         app.use('/blog', blogRouter);
         app.use('/users', usersRouter);
         app.use('/facility', facilityRouter);
+        app.use('/review', reviewRouter);
         //app.use(express.static(path.join(__dirname, 'public')));
     
         // 받는 곳
