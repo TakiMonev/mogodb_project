@@ -20,8 +20,6 @@ reviewRouter.post('/', async (req, res) => {
         console.log("posting information in reviewRouter");
         let { review_p, review_item, review_mem, review_title, review_con, review_date } = req.body;
 
-        if (!review_date) return res.status(400).send({ err: "Write date" });
-
         const review = new Review(req.body);
         await review.save();
         
