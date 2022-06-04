@@ -30,7 +30,7 @@ themeRouter.post('/', async (req, res) => {
     }
 });
 
-reviewRouter.delete('/:theme', async(req, res) => {
+themeRouter.delete('/:theme', async(req, res) => {
     try {
         const { theme } = req.params;
         
