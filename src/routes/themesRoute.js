@@ -1,9 +1,9 @@
 const express = require('express');
-const themeRouter = express.Router();
+const themesRouter = express.Router();
 const mongoose = require("mongoose");
 const { Themes } = require('../models/Themes');
 
-themeRouter.get('/', async(req, res) => {
+themesRouter.get('/', async(req, res) => {
     try {
         const theme = await Themes.find({});
         return res.send({ theme });
@@ -13,7 +13,7 @@ themeRouter.get('/', async(req, res) => {
     }
 });
 
-themeRouter.post('/', async (req, res) => {
+themesRouter.post('/', async (req, res) => {
     try {
         console.log("posting information in themeRouter");
         let { theme_p, theme_owner, theme_title, theme_con } = req.body;
@@ -30,7 +30,7 @@ themeRouter.post('/', async (req, res) => {
     }
 });
 
-themeRouter.delete('/:theme', async(req, res) => {
+themesRouter.delete('/:theme', async(req, res) => {
     try {
         const { theme } = req.params;
         
