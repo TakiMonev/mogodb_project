@@ -6,13 +6,15 @@ const { usersRouter } = require('./routes/usersRoute');
 const { facilityRouter } = require('./routes/facilityRoute');
 const { mainRouter } = require('./routes/mainRoute');
 const { reviewRouter } = require('./routes/reviewRoute');
-const { themesRouter } = require('./routes/themesRoute')
+const { themesRouter } = require('./routes/themesRoute');
+const { uploadRouter } = require('./routes/upload');
 const mongoose = require('mongoose');
 
 const ejs = require('ejs');
 const http = require('http');
 const fs = require('fs'); 
 const path = require('path');
+const multer = require('multer');
 
 app.set('view engine', 'ejs');
 
@@ -46,6 +48,7 @@ const server = async() => {
         app.use('/facility', facilityRouter);
         app.use('/review', reviewRouter);
         app.use('/themes', themesRouter);
+        app.use('/upload', uploadRouter);
         //app.use(express.static(path.join(__dirname, 'public')));
     
         // 받는 곳
