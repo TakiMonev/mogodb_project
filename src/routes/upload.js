@@ -3,6 +3,7 @@ const uploadRouter = express.Router();
 const mongoose = require("mongoose");
 const multer = require('multer');
 const fs = require('fs');
+var path = require('path');
 
 try {
     fs.readdirSync('uploads');
@@ -18,27 +19,23 @@ const upload = multer({
         },
         filename(req, file, done) {
             const ext = path.extname(file.originalname);
-            done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+            done(null, path.basename(file.originalname, ext)/* + Date.now() + ext*/);
         },
     }),
-    limits: { fileSize: 5 * 1024 },
+    limits: { fileSize: 1024 * 1024 },
 });
 
-uploadRouter.get('/upload', (req, res) => {
+uploadRouter.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../web/main.html'));
 });
 
-uploadRouter.post('/upload', 
+uploadRouter.post('/', 
     upload.fields([{ name: 'sample' }/*, { name: 'image2'}*/]),
     (req, res) => {
         console.log(req.files, req.body);
         res.send('ok');   
     },    
 );
-
-uploadRouter.get('/', (req, res, next) => {
-    console.log('GET / 요청에서만 실행됩니다.');
-})
 
 module.exports = {
     uploadRouter
