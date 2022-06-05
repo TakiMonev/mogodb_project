@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const multer = require('multer');
 const fs = require('fs');
 var path = require('path');
+const { userInfo } = require('os');
 
 try {
     fs.readdirSync('uploads');
@@ -30,10 +31,10 @@ uploadRouter.get('/', (req, res) => {
 });
 
 uploadRouter.post('/', 
-    upload.fields([{ name: 'sample' }/*, { name: 'image2'}*/]),
+    upload.fields([{ name: 'sample.jpg' }/*, { name: 'image2'}*/]),
     (req, res) => {
         console.log(req.files, req.body);
-        res.send('ok');   
+        res.json({ url: `/upload/${req.file.filename}`});   
     },    
 );
 

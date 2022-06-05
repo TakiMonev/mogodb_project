@@ -58,6 +58,106 @@
         </script>
         
         <style>
+            /* banner */
+            .banner {
+                width: 100%;
+                height: 600px;
+                background-image: url(../Images/Banner_Background.jpg);
+            }
+
+            .banner_side {
+                width: 10%;
+                height: 600px;
+            }
+
+            .banner_button_layer {
+                position: relative;
+                top: 300px;
+            }
+
+            .banner_center {
+                width: 80%;
+                height: 500px;
+                padding: 50px;
+                box-sizing: border-box;
+            }
+
+            .banner_commerce_layer {
+                height: 500px;
+                background-color: beige;
+            }
+            /* ************************** */
+
+            /* main_best */
+            .best 
+            {
+                width: 100%;
+                height: 300px;
+                background-color: aqua;
+            }
+
+            .best_content_box
+            {
+                background-image: url(../Images/black_blocks.jpg);
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                height: 300px;
+            }
+
+            .best_content_layer
+            {
+                position: relative;
+                box-sizing: border-box;
+                cursor: pointer;
+                width: 75%;
+                height: 200px;
+                padding: 10px;
+                margin-top: 50px;
+                backdrop-filter: blur(5px);
+            }
+
+            .best_content_layer::after {
+                width: 100%;
+                height: 100%;
+                content: "";
+                filter: blur(2px);
+                background: url(../Images/black_blocks.jpg);
+            }
+
+            #TOP {
+                color: white;
+            }
+            /* ************************** */
+
+            .header {
+                width: 100%;
+                height: 50px;
+                background-color: #efefef;
+            }
+
+            img.logo_img {
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                padding: 5px;
+            }
+
+            .login {
+                position: relative;
+                float: right;
+                margin: 15px;
+            }
+            /* ************************** */
+
+            .region {
+                margin-left: auto;
+                margin-right: auto;
+                width: 80%;
+                min-height: 600px;
+            }
+
+            /* */
             * {
                 list-style: none;
                 text-decoration: none;
@@ -145,14 +245,14 @@
                 <!-- <div class="col-xs-12 col-sm-6 col-md-7 col-lg-12" style="background-color:red;"> -->
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
                     <div class="best_content_layer">
-                        <img src="https://www.flickr.com/photos/115800706@N07/50244276996/in/explore-2022-05-25/" class = "img-circle member" width="120" height="120" data-target="#TOP1">
+                        <img src="upload" class = "img-circle member" width="120" height="120" data-target="#TOP1">
                         <p></p>
                         <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
                     <div class="best_content_layer">
-                        <img src="https://www.flickr.com/photos/115800706@N07/50244276996/in/explore-2022-05-25/" class = "img-circle member" width="120" height="120" data-toggle="collapse">
+                        <img src="upload/sample.jpg" class = "img-circle member" width="120" height="120" data-toggle="collapse">
                         <p></p>
                         <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
                     </div>
