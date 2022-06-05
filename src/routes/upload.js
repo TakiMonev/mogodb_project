@@ -26,7 +26,7 @@ const upload = multer({
 });
 
 uploadRouter.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../web/main.html'));
+    res.sendFile(path.join(__dirname, '../web/index.ejs'));
 });
 
 uploadRouter.post('/', 
