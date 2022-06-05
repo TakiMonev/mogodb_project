@@ -49,7 +49,7 @@ const server = async() => {
         app.use('/review', reviewRouter);
         app.use('/themes', themesRouter);
         app.use('/upload', uploadRouter);
-        app.use('/img', express.static(path.join(__dirname, 'uploads')));
+        app.use('/img', express.static(path.join(__dirname, '/uploads')));
         //app.use(express.static(path.join(__dirname, 'public')));
     
         // 받는 곳

@@ -17,7 +17,7 @@ const upload = multer({
     storage: multer.diskStorage({
         destination(req, file, cb) {
             // MongoDB 폴더 안으로 들어감
-            cb(null, 'uploads/');
+            cb(null, 'src/uploads/');
         },
         filename(req, file, cb) {
             const ext = path.extname(file.originalname);
