@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const multer = require('multer');
 const fs = require('fs');
 var path = require('path');
-const { userInfo } = require('os');
+const { Post } = require('../models/Post');
 
 try {
     fs.readdirSync('uploads');
@@ -15,15 +15,17 @@ try {
 
 const upload = multer({
     storage: multer.diskStorage({
-        destination(req, file, done) {
-            done(null, 'uploads/');
+        destination(req, file, cb) {
+            // MongoDB 폴더 안으로 들어감
+            cb(null, 'uploads/');
         },
-        filename(req, file, done) {
+        filename(req, file, cb) {
             const ext = path.extname(file.originalname);
-            done(null, path.basename(file.originalname, ext)/* + Date.now() + ext*/);
+            console.log(file.originalname);
+            cb(null, path.basename(file.originalname, ext) + Date.now() + ext);
         },
     }),
-    limits: { fileSize: 1024 * 1024 },
+    limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 uploadRouter.get('/', (req, res) => {
@@ -31,12 +33,27 @@ uploadRouter.get('/', (req, res) => {
 });
 
 uploadRouter.post('/', 
-    upload.fields([{ name: 'sample.jpg' }/*, { name: 'image2'}*/]),
+    upload.single('imgFile'),
     (req, res) => {
-        console.log(req.files, req.body);
-        res.json({ url: `/upload/${req.file.filename}`});   
-    },    
-);
+        console.log(req.file);
+        res.sendFile(path.join(__dirname, '../web/index.ejs'));   
+});
+
+/*
+const upload2 = multer();
+uploadRouter.post('/', upload2.none(), async (req, res, next) => {
+    try {
+        const post = await Post.create({
+            content: req.body.content,
+            img: req.body.url,
+        });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+*/
 
 module.exports = {
     uploadRouter

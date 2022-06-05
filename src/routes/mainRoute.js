@@ -2,6 +2,7 @@ const { Router } = require('express');
 //const facilityRouter = Router();      //mainRouter로 대체
 const mongoose = require("mongoose");
 const { Facility } = require('../models/Facility');
+const { Post } = require('../models/Post');
 
 const http = require('http');
 const fs = require('fs'); 
@@ -15,7 +16,7 @@ const mainRouter = express.Router();
 const ejs = require('ejs');
 
 mainRouter.use(express.static(__dirname));
-var url = "http://3.34.53.201/facility";
+var facurl = "http://3.34.53.201/facility";
 
 mainRouter.get('/', async (req, res) => {
     Facility.find({}, function(err, allFac) {
