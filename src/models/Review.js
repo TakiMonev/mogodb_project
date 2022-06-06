@@ -7,7 +7,7 @@ const ReviewSchema = new Schema({
     review_mem: String,     // 리뷰 mem_id
     review_title: String,   // 리뷰 제목
     review_con: String,     // 리뷰 내용
-    review_date:{ type: String, unique: true }     // 작성일
+    review_date: String     // 작성일
 }, { timestamps: true })    // timestamps = 옵션
 
 const Review = model('review', ReviewSchema);
