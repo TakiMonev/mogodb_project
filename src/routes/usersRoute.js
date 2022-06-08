@@ -39,7 +39,7 @@ usersRouter.post('/', async (req, res) => {
     }
 });
 
-usersRouter.post('/deleteData', async(req, res) => {
+usersRouter.post('/deleteUser', async(req, res) => {
     try {
         const { userName } = req.body
         

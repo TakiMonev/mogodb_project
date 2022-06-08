@@ -31,7 +31,7 @@ reviewRouter.post('/', async (req, res) => {
     }
 });
 
-reviewRouter.post('/deleteData', async(req, res) => {
+reviewRouter.post('/deleteReview', async(req, res) => {
     try {
         const { customerName } = req.body
         
