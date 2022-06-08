@@ -35,7 +35,7 @@ reviewRouter.post('/deleteReview', async(req, res) => {
     try {
         const { customerName } = req.body
         
-        console.log("Found the customer's name : " + JSON.stringify(facilityName) + "\n");
+        console.log("Found the customer's name : " + JSON.stringify(customerName) + "\n");
 
         const checkCustomer = await Review.findOne({ review_mem: customerName });
 
