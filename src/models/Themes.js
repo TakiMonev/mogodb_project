@@ -6,6 +6,7 @@ const ThemeSchema = new Schema({
     theme_owner: String,    // 시설주
     theme_title: String,    // 시설 이름
     theme_con: String,      // 시설 내용
+    theme_name: String      // 테마 이름
 }, { timestamps: true })    // timestamps = 옵션
 
 const Themes = model('theme', ThemeSchema);

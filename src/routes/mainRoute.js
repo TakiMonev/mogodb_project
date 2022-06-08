@@ -2,7 +2,8 @@ const { Router } = require('express');
 //const facilityRouter = Router();      //mainRouter로 대체
 const mongoose = require("mongoose");
 const { Facility } = require('../models/Facility');
-const { Post } = require('../models/Post');
+const { Users } = require('../models/Users')
+//const { Post } = require('../models/Post');
 
 const http = require('http');
 const fs = require('fs'); 
@@ -25,6 +26,14 @@ mainRouter.get('/', async (req, res) => {
         })
     })
 });
+
+mainRouter.get('/login', async (req, res) => {
+    Users.find({}, function(err, allUsers) {
+        res.render(path.join(dirPath, "/login_index.ejs"), {
+            AllUsers: allUsers
+        })
+    })
+})
 
 module.exports = {
     mainRouter

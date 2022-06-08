@@ -39,21 +39,26 @@ usersRouter.post('/', async (req, res) => {
     }
 });
 
-usersRouter.delete('/:userId', async(req, res) => {
+usersRouter.post('/deleteData', async(req, res) => {
     try {
-        const { userId } = req.params;
+        const { userName } = req.body
         
-        // 0520 에러 케이스 추가   
-        if (!mongoose.isValidObjectId(userId)) 
-            return res.status(400).send({ err: "Invalid userId" });
+        console.log("Found the user's name : " + JSON.stringify(userName) + "\n");
 
-        console.log("Found the user's ID : " + JSON.stringify(userId) + "\n");
-        const usersData = await Users.findOneAndDelete({ mem_id: userId });
-        
-        return res.send({ usersData });
-    } catch(err) {
+        const checkUser = await Users.findOne({ mem_id: userName });
+
+        if (checkUser)
+        {   
+            const user = await Users.findOneAndDelete({ mem_id: userName });
+            console.log("Data Deleted");
+            res.status(201).send({ user });
+        }
+        else
+            res.send("User not found");
+
+    } catch (err) {
         console.log(err);
-        return res.status(500).send({ err: err.message });
+        res.status(500).send({ err: err.message })
     }
 });
 

@@ -24,7 +24,6 @@ reviewRouter.post('/', async (req, res) => {
         await review.save();
         
         return res.send({ review });
-
         
     } catch(err) {
         console.log(err);
@@ -32,20 +31,26 @@ reviewRouter.post('/', async (req, res) => {
     }
 });
 
-reviewRouter.delete('/:userId', async(req, res) => {
+reviewRouter.post('/deleteData', async(req, res) => {
     try {
-        const { userId } = req.params;
+        const { customerName } = req.body
         
-        if (!mongoose.isValidObjectId(userId)) 
-            return res.status(400).send({ err: "Invalid userId" });
+        console.log("Found the customer's name : " + JSON.stringify(facilityName) + "\n");
 
-        console.log("Found the user's ID : " + JSON.stringify(userId) + "\n");
-        const reviewData = await Review.findOneAndDelete({ review_mem: userId });
-        
-        return res.send({ reviewData });
-    } catch(err) {
+        const checkCustomer = await Review.findOne({ review_mem: customerName });
+
+        if (checkCustomer)
+        {   
+            const review = await Review.findOneAndDelete({ review_mem: customerName });
+            console.log("Data Deleted");
+            res.status(201).send({ review });
+        }
+        else
+            res.send("Data not found");
+
+    } catch (err) {
         console.log(err);
-        return res.status(500).send({ err: err.message });
+        res.status(500).send({ err: err.message })
     }
 });
 

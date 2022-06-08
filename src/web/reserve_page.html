@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="./css/nav.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <title>JoinUs</title>
+
+    <style>
+        .navbar .navbar-header {
+            float: none;
+        }
+
+        .navbar .navbar-toggle {
+            display: block;
+        }
+
+        .navbar .navbar-collapse.collapse {
+            display: none!important;
+        }
+
+        .navbar .navbar-nav {
+            float: none!important;
+        }
+
+        .navbar .navbar-nav > li {
+            float: none;
+        }
+
+        .navbar .navbar-collapse.collapse.in {
+            display: block !important;
+        }
+
+        .login {
+            position: relative;
+            float: right;
+            margin: 15px;
+        }
+
+    </style>
+    <script>
+
+    ///////////////////////////////////////////////////////
+    ///////////////  MAKE INFO  ///////////////////////////
+    ///////////////////////////////////////////////////////
+      const theme = new Array("all","theme1","theme2","theme3");
+      //입력받은 테마의 갯수만큼 데이터 배열 선언
+      const data = new Array(theme.length);
+      // 그래프 형식에 맞는 데이터 배열 선언
+      const gdata = new Array(theme.length);
+
+      //data [0] data[1] data[2]등을 각각 또 배열로 만들어준다.
+      function generate_data(num){
+          data[1]=new Array(
+            ["10시","3명","이정주","010-xxx-xxx"],
+            ["11시","2명","이정주2","020-xxx-xxx"],
+            ["12시","0명","이정주3","030-xxx-xxx"],
+            ["13시","1명","이정주4","040-xxx-xxx"],
+            ["14시","7명","이정주5","050-xxx-xxx"],
+            ["15시","6명","이정주6","060-xxx-xxx"],
+            ["16시","5명","이정주7","070-xxx-xxx"],
+            ["17시","4명","이정주8","080-xxx-xxx"],
+            ["18시","4명","이정주8","080-xxx-xxx"],
+            ["19시","4명","이정주8","080-xxx-xxx"],
+            ["20시","4명","이정주8","080-xxx-xxx"],
+            ["21시","4명","이정주8","080-xxx-xxx"]
+
+          )
+          data[2]=new Array(
+            ["10시","5명","이상윤","010-xxx-xxx"],
+            ["11시","9명","이상윤2","020-xxx-xxx"],
+            ["12시","1명","이상윤3","030-xxx-xxx"],
+            ["13시","2명","이상윤4","040-xxx-xxx"],
+            ["14시","4명","이상윤5","050-xxx-xxx"],
+            ["15시","4명","이상윤6","060-xxx-xxx"],
+            ["16시","3명","이상윤7","070-xxx-xxx"],
+            ["17시","7명","이상윤8","080-xxx-xxx"],
+            ["18시","7명","이상윤8","080-xxx-xxx"],
+            ["19시","8명","이상윤8","080-xxx-xxx"],
+            ["20시","0명","이상윤8","080-xxx-xxx"],
+            ["21시","1명","이상윤8","080-xxx-xxx"]
+
+          )
+
+          data[3]=new Array(
+            ["10시","1명","이시헌","010-xxx-xxx"],
+            ["11시","2명","이시헌2","020-xxx-xxx"],
+            ["12시","5명","이시헌3","030-xxx-xxx"],
+            ["13시","7명","이시헌4","040-xxx-xxx"],
+            ["14시","10명","이시헌5","050-xxx-xxx"],
+            ["15시","8명","이시헌6","060-xxx-xxx"],
+            ["16시","4명","이시헌7","070-xxx-xxx"],
+            ["17시","6명","이시헌8","080-xxx-xxx"],
+            ["18시","1명","이시헌8","080-xxx-xxx"],
+            ["19시","4명","이시헌8","080-xxx-xxx"],
+            ["20시","6명","이시헌8","080-xxx-xxx"],
+            ["21시","2명","이시헌8","080-xxx-xxx"]
+
+          )
+
+          gdata[1] = google.visualization.arrayToDataTable([
+            ['시간', '인원수'],
+            ["10시",3],
+            ["11시",2],
+            ["12시",0],
+            ["13시",1],
+            ["14시",7],
+            ["15시",6],
+            ["16시",5],
+            ["17시",4],
+            ["18시",4],
+            ["19시",4],
+            ["20시",4],
+            ["21시",4]
+          ]);
+
+          gdata[2] = google.visualization.arrayToDataTable([
+            ['시간', '인원수'],
+            ["10시",5],
+            ["11시",9],
+            ["12시",1],
+            ["13시",2],
+            ["14시",4],
+            ["15시",4],
+            ["16시",3],
+            ["17시",7],
+            ["18시",7],
+            ["19시",8],
+            ["20시",0],
+            ["21시",1]
+          ]);
+
+          gdata[3] = google.visualization.arrayToDataTable([
+            ['시간', '인원수'],
+            ["10시",1],
+            ["11시",2],
+            ["12시",5],
+            ["13시",7],
+            ["14시",10],
+            ["15시",8],
+            ["16시",4],
+            ["17시",6],
+            ["18시",1],
+            ["19시",4],
+            ["20시",6],
+            ["21시",2]
+          ]);
+
+      }
+      function contentIndex(index){
+        //x에 선택한 값의 인덱스가 들어옴, 스크립트로 이것에 맞는 배열을 선택하도록 하면 된다.
+        //만약 0번 인덱스가 선택되었다면,
+        generate_data(index);
+        var list_time;
+        var temp_time = new Array();
+        var list_number;
+        var temp_number = new Array();
+        var list_name;
+        var temp_name = new Array();
+        var list_info;
+        var temp_info = new Array();
+
+        for(var i=0;i<data[index].length;i++){
+          temp_time.push(data[index][i][0]);
+          list_time=temp_time.join("</br></br>");
+
+          temp_number.push(data[index][i][1]);
+          list_number=temp_number.join("</br></br>");
+
+          temp_name.push(data[index][i][2]);
+          list_name=temp_name.join("</br></br>");
+
+          temp_info.push(data[index][i][3]);
+          list_info=temp_info.join("</br></br>");
+        }
+        document.getElementById("time").innerHTML = list_time;
+        document.getElementById("the number").innerHTML = list_number;
+        document.getElementById("name").innerHTML = list_name;
+        document.getElementById("info").innerHTML = list_info;
+        drawChart_info(index);
+
+      }
+
+      /////////////////////////////////////////////////////////
+      ///////////////  CHART AREA  ////////////////////////////
+      /////////////////////////////////////////////////////////
+
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawChart_info(index) {
+
+        var button = document.getElementById('change-chart');
+        var graph_area = document.getElementById('graph_area');
+        var Options = {
+          width : 500,
+          legend: { position: 'none' },
+          chart: {
+            title: '테마별 현황 그래프',
+          }
+        };
+        function drawChart() {
+          var Chart = new google.charts.Bar(graph_area);
+          Chart.draw(gdata[index], google.charts.Bar.convertOptions(Options));
+          button.onclick = drawClassicChart;
+        }
+        drawChart();
+    };
+    </script>
+  </head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="login">
+                <button type="button" class="btn btn-info">로그인</button>
+                <button type="button" class="btn btn-info">회원가입</button>
+            </div>
+            <a class="navbar-brand" style="margin-top: 8px;" href="#">JoinUs</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <script>
+          for(var i=0; i<theme.length; i++){
+            document.write(
+              '<div class="col-sm-3" style = "margin-top 10px;">'+
+                '<a href="javascript:contentIndex('+i+');">'+
+                  '<p style="font-size : 20px; text-align : center;">'+theme[i]+'</p>'+
+                '</a>'+
+              '</div>'
+            );
+          }
+        </script>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <!-- left section content -->
+      <div class="col-sm-6" style = " min-width:500px; margin-top : 50px;">
+          <h2>예약현황</h2>
+          <div id="text_area">
+          <div class="col-sm-3">
+            <h3>시간 : </h3>
+            <p id = "time"></p>
+          </div>
+          <div class="col-sm-3">
+            <h3>예약자 수 : </h3>
+            <p id="the number"></p>
+          </div>
+          <div class="col-sm-3">
+            <h3>예약자 이름 : </h3>
+            <p id="name"></p>
+          </div>
+          <div class="col-sm-3">
+            <h3>예약자 정보 : </h3>
+            <p id="info"></p>
+          </div>
+          </div>
+      </div>
+      <!-- right section content -->
+      <div class="col-sm-6" style = " min-width:500px; margin-top : 50px;">
+        <h2>현황 그래프</h2>
+        <div id="graph_area" style = "min-width:450px; height : 600px;">
+
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+
+    <div class="side_layout">
+
+    </div>
+  </body>
+</html>
