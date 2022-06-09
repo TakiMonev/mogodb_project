@@ -5,6 +5,7 @@
         <link href="./CSS/main_banner.css" rel="stylesheet">
         <link href="./CSS/main_best.css" rel="stylesheet">
         <link href="./CSS/main_region.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://drive.google.com/file/d/1n-oSYNTs-pGrJz7PXcKm-63LIj6bdxJj/view?usp=sharing">
 
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
@@ -22,36 +23,163 @@
 
 
         <script>
+            var region = 0;
+            var tmptable = "";
+
+            function getCookie(cookie_name) {
+                var x, y;
+                var val = document.cookie.split(';');
+                for (var i = 0; i < val.length; i++) {
+                    x = val[i].substr(0, val[i].indexOf('='));
+                    y = val[i].substr(val[i].indexOf('=') + 1);
+                    x = x.replace(/^\s+|\s+$/g, '');
+                    if (x == cookie_name) {
+                        return unescape(y);
+                    }
+                }
+            }
+
+            function loginArea(strText)
+            {
+                var la = document.getElementById('login_area');
+                var jsonText = JSON.parse(strText);
+
+                for (let i = 0; i < jsonText.length; i++)
+                {
+                    if (!document.getCookie)
+                        break;
+
+                    if (jsonText[i].mem_id.equals(document.getCookie))
+                    {    
+                        la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201'>로그아웃</button>" +
+                        "<button type='button' class='btn btn-info' style='margin-left: 10px' location.href='http://3.34.53.201'>MY</button>"
+                        return;
+                    }
+                }
+
+                la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201/login'>로그인</button>" + 
+                "<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201'>회원가입</button>"  
+                return;              
+            }
+
+            $(document).ready(function () {
+                $(".banner_commerce_layer").not(".active").hide(); 
+                setInterval(nextSlide, 4000); 
+            });
+
+            function prevSlide() {
+                $(".banner_commerce_layer").hide(); 
+                var allSlide = $(".banner_commerce_layer"); 
+                var currentIndex = 0; 
+                
+                $(".banner_commerce_layer").each(function(index,item){ 
+                    if($(this).hasClass("active")) {
+                        currentIndex = index;
+                }
+                });
+        
+                var newIndex = 0;
+                
+                if(currentIndex <= 0) {
+                    newIndex = allSlide.length-1;
+                } else {
+                    newIndex = currentIndex-1;
+                }
+
+                $(".banner_commerce_layer").removeClass("active");
+                $(".banner_commerce_layer").eq(newIndex).addClass("active");
+                $(".banner_commerce_layer").eq(newIndex).show();
+
+            }
+
+            function nextSlide() {
+                $(".banner_commerce_layer").hide();
+                var allSlide = $(".banner_commerce_layer");
+                var currentIndex = 0;
+                
+                $(".banner_commerce_layer").each(function(index,item){
+                    if($(this).hasClass("active")) {
+                        currentIndex = index;
+                    }
+                    });
+                
+                var newIndex = 0;
+                
+                if(currentIndex >= allSlide.length-1) {
+                    newIndex = 0;
+                } else {
+                    newIndex = currentIndex+1;
+                }
+
+                $(".banner_commerce_layer").removeClass("active");
+                $(".banner_commerce_layer").eq(newIndex).addClass("active");
+                $(".banner_commerce_layer").eq(newIndex).show();
+                
+            }
+
+            function setFacType(num)
+            {
+                let easycal = num % 1000;
+                tmptable = "";
+
+                if (easycal >= 0 && easycal < 100)
+                {
+                    tmptable = "<td>방탈출</td>"
+                }
+
+                else if (easycal >= 100 && easycal < 200)
+                {
+                    tmptable = "<td>보드게임</td>"
+                }
+
+                else if (easycal >= 200 && easycal < 300)
+                {
+                    tmptable = "<td>볼링</td>"
+                }
+
+                else if (easycal >= 300 && easycal < 400)
+                {
+                    tmptable = "<td>파티룸</td>"
+                }
+
+                else if (easycal >= 400 && easycal < 500)
+                {
+                    tmptable = "<td>당구</td>"
+                }
+
+                else
+                {
+                    tmptable = "<td>VR 게임방</td>"
+                }
+            }
+
             function setRegion(strText, num)
             {
                 region = num;
                 
-                console.log(strText);
                 var jsonText = JSON.parse(strText);
                 var table = document.getElementById("make_region_table");
                 table.innerHTML = "";
 
-                table.innerHTML += "<tr>";
                 for (let i = 0; i < jsonText.length; i++)
                 {
                     setFacType(jsonText[i].fac_p);
 
-                    if (jsonText[i].fac_p >= 1000 && jsonText[i].fac_p < 2000)
+                    if (jsonText[i].fac_p >= 1000 && jsonText[i].fac_p < 2000 && (region == 0 || region == 1))
                     {   
                         table.innerHTML += "<tr><td>서울</td><td>" + jsonText[i].fac_ceo + "</td>" + tmptable + "</tr>";
                     }
 
-                    else if (jsonText[i].fac_p >= 2000 && jsonText[i].fac_p < 3000)
+                    else if (jsonText[i].fac_p >= 2000 && jsonText[i].fac_p < 3000 && (region == 0 || region == 2))
                     {
                         table.innerHTML += "<tr><td>경기</td><td>" + jsonText[i].fac_ceo + "</td>" + tmptable + "</tr>";
                     }
 
-                    else
+                    else if (jsonText[i].fac_p >= 3000 && jsonText[i].fac_p < 4000 && (region == 0 || region == 3))
                     {
                         table.innerHTML += "<tr><td>충청</td><td>" + jsonText[i].fac_ceo + "</td>" + tmptable + "</tr>";
                     }
                 }
-                console.log(table.innerHTML);
             }
         </script>
         
@@ -60,8 +188,7 @@
             .banner {
                 width: 100%;
                 height: 600px;
-                display: flex;
-                background-image: url(../Images/Banner_Background.jpg);
+                background-image: url(https://bl3301files.storage.live.com/y4mN02pUJB-olo_XZ4uDw3lkWdvK3kFpxSrLMcG7vn_GWoUUZGgV0WT1jJvlw7peHoBbq7XY73g5Sm56LB9Pbc7i8VF4Tw6rq4f8s0vj3oHC2MkLT98HePkmt9QuO20FUr4Z4kUb8tYf88ES_pIjDk35k_GH3gPijm9KSS771nCBv8TVTAckAQVzCv0kheW8656?width=612&height=312&cropmode=none);
             }
 
             .banner_side {
@@ -79,11 +206,13 @@
                 height: 500px;
                 padding: 50px;
                 box-sizing: border-box;
+                display: felx;
             }
 
             .banner_commerce_layer {
                 height: 500px;
-                background-color: beige;
+                background-color: black;
+                background-size: contain;
             }
             /* ************************** */
 
@@ -97,7 +226,7 @@
 
             .best_content_box
             {
-                background-image: url(../Images/black_blocks.jpg);
+                background-image: url(https://bl3301files.storage.live.com/y4m1avnOoGR41XIhBidAIllETBK4is4UGwYrsn9ub0f_bf-EyaA9baN7HIV3N6CRBGWIWmpnQzr-kME6qqkiCxuJ7oGGSU7cAGsfzQnsAxNdO5AKfY25nN9rREPNgrg0_g4wx239DfKQWWvR_IStiE2a5ZeOlZ32KBI4efcieLlEKZw8LFD26nAaD7RpNY1WEmR?width=1500&height=1102&cropmode=none);
                 box-sizing: border-box;
                 display: flex;
                 justify-content: center;
@@ -121,7 +250,7 @@
                 height: 100%;
                 content: "";
                 filter: blur(2px);
-                background: url(../Images/black_blocks.jpg);
+                background: url(https://bl3301files.storage.live.com/y4m1avnOoGR41XIhBidAIllETBK4is4UGwYrsn9ub0f_bf-EyaA9baN7HIV3N6CRBGWIWmpnQzr-kME6qqkiCxuJ7oGGSU7cAGsfzQnsAxNdO5AKfY25nN9rREPNgrg0_g4wx239DfKQWWvR_IStiE2a5ZeOlZ32KBI4efcieLlEKZw8LFD26nAaD7RpNY1WEmR?width=1500&height=1102&cropmode=none);
             }
 
             #TOP {
@@ -157,6 +286,7 @@
             }
 
             /* */
+
             * {
                 list-style: none;
                 text-decoration: none;
@@ -201,18 +331,20 @@
             }
 
         </style>
-            
         
     </head>
 
     <body>
-        <input type="hidden" id="myJsonData" value="<% JSON.stringify(AllFac) %>" />
+        <input type="hidden" id="myJsonData" value="<%= JSON.stringify(AllFac) %>" />
+        <input type="hidden" id="myUserData" value="<%= JSON.stringify(AllUsers) %>" />
+
         <nav class="navbar navbar-default">
             <div class="container-fluid">
             <div class="navbar-header">
-                <div class="login">
-                    <button type="button" class="btn btn-info">로그인</button>
-                    <button type="button" class="btn btn-info">회원가입</button>
+                <div class="login" id="login_area">
+                    <script>
+                        loginArea(document.getElementById("myUserData").value);
+                    </script>
                 </div>
                 <a class="navbar-brand" style="margin-top: 8px;" href="#">JoinUs</a>
             </div>
@@ -223,17 +355,21 @@
             <div class="row">
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 bannerfside">
                     <div class="banner_button_layer">
-                        <button type="button" class="btn btn-light"><</button>
+                        <button type="button" class="btn btn-light" id="prev" onclick="prevSlide()"><</button>
                     </div>
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 banner_center">
-                    <div class="banner_commerce_layer">
+                    <div class="banner_commerce_layer active">
+                        <img height="500px" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" src="https://bl3301files.storage.live.com/y4mS9r4SCtRyryp0WPDJiLP_lZXiyrtq_CF80nOtb4v0WdxRD4lZQf158Oo_bVincMCu0o4wLE-yM4OrAMiHFLk_ZrV3gsVJ15CUt3Td9NiYMVnnYQJS5nfpPDImJrqoAlPbxGq8iTvBg9FU4Wc7epPGaG02i2lz7hMk8oX8sdkk9eTJD05N8ZYeNukpkZZl1ft?width=827&height=536&cropmode=none"/>
+                    </div>
 
+                    <div class="banner_commerce_layer">
+                        <img height="500px" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" src="https://bl3301files.storage.live.com/y4mYgPSW2nofxnttVsgmlbdOfoplTa6hC0Fv-Qux3TNVZfzgeUXI5MBQx_8BKQA8wrhJUbyjqvwsbLoV6CqzIRXfJ1zXUSJn4vVPUsUCDLXRMbHXg5s1pyEeq5I9iOXV7L7CMmFpjQguboCLC_wmd7oOQKNlwv2NLg_lIQHteTACpFuuJ_pSOygexNJpeQhLOGX?width=940&height=446&cropmode=none"/>
                     </div>
                 </div>
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 banner_side">
                     <div class="banner_button_layer">
-                        <button type="button" class="btn btn-light">></button>
+                        <button type="button" class="btn btn-light" id="next" onclick="nextSlide()">></button>
                     </div>
                 </div>
             </div>
@@ -242,23 +378,26 @@
         <div class="container-fluid text-center best">
             <div class="row">
                 <!-- <div class="col-xs-12 col-sm-6 col-md-7 col-lg-12" style="background-color:red;"> -->
+                <script>
+                    TopContentFunc();
+                </script>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
                     <div class="best_content_layer">
-                        <img src="upload" class = "img-circle member" width="120" height="120" data-target="#TOP1">
+                        <img src="https://bl3301files.storage.live.com/y4mxgd-vAQOrTSMAd6l4R_cd6aTddqyRsmYIAnpnL1zrLyHUcLsPBlNV-cd4xqGbuOwQCt_FqjDtQFfq0diJkabE6dVUHe9xuQD1A8awDS9P9wKg9o-bA_788gBrIbpmxYjgBCgHKO26LUSYmADUyAcKLg9juOxSirVEvTBZWfAyhv3qGPoweSFYdbFCaqusUXI?width=722&height=710&cropmode=none" class = "img-circle member" width="120" height="120" data-target="#TOP1"/>
                         <p></p>
                         <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
                     <div class="best_content_layer">
-                        <img src="upload/sample.jpg" class = "img-circle member" width="120" height="120" data-toggle="collapse">
+                        <img src="https://bl3301files.storage.live.com/y4mxgd-vAQOrTSMAd6l4R_cd6aTddqyRsmYIAnpnL1zrLyHUcLsPBlNV-cd4xqGbuOwQCt_FqjDtQFfq0diJkabE6dVUHe9xuQD1A8awDS9P9wKg9o-bA_788gBrIbpmxYjgBCgHKO26LUSYmADUyAcKLg9juOxSirVEvTBZWfAyhv3qGPoweSFYdbFCaqusUXI?width=722&height=710&cropmode=none" class = "img-circle member" width="120" height="120" data-toggle="collapse"/>
                         <p></p>
                         <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
                     <div class="best_content_layer">
-                        <img src="https://www.flickr.com/photos/115800706@N07/50244276996/in/explore-2022-05-25/" class = "img-circle member" width="120" height="120" data-toggle="collapse">
+                        <img src="https://bl3301files.storage.live.com/y4mxgd-vAQOrTSMAd6l4R_cd6aTddqyRsmYIAnpnL1zrLyHUcLsPBlNV-cd4xqGbuOwQCt_FqjDtQFfq0diJkabE6dVUHe9xuQD1A8awDS9P9wKg9o-bA_788gBrIbpmxYjgBCgHKO26LUSYmADUyAcKLg9juOxSirVEvTBZWfAyhv3qGPoweSFYdbFCaqusUXI?width=722&height=710&cropmode=none" class = "img-circle member" width="120" height="120" data-toggle="collapse"/>
                         <p></p>
                         <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
                     </div>
@@ -268,9 +407,7 @@
 
         <div class="region">
             <div class="region_select">
-                <article>
 
-                </article>
             </div>
             <h3>지역 선택</h3>
             <ul class="nav navbar-nav default">
@@ -278,9 +415,9 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">전체 <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a onclick="setRegion(document.getElementById('myJsonData').value, 0)">전체</a></li>
-                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 1)" class="showRegion">서울</a></li>
-                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 2)" class="showRegion">경기</a></li>
-                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 3)" class="showRegion">청주</a></li>
+                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 1)">서울</a></li>
+                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 2)">경기</a></li>
+                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 3)">청주</a></li>
                 </ul>
                 </li>
             </ul>
@@ -289,51 +426,20 @@
                 <thead>
                     <tr>
                         <th>지역</th>
-                        <th>상세 위치</th>
+                        <th>시설주</th>
                         <th>카테고리</th>
                     </tr>
                 </thead>
                 <tbody id="make_region_table">
-                    <%
-                        AllFac.for(var i = 0; i < AllFac.length; i++) { 
-                            if (AllFac[i].fac_p >= 1000 && AllFac[i].fac_p < 2000) {
-                
-                            }   
-                        }
-                    %>
-                </tbody>
-            </table>
-
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>지역</th>
-                        <th>상세 위치</th>
-                        <th>카테고리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>강남</td>
-                        <td>강남강남강남</td>
-                        <td>방탈출 카페</td>
-                    </tr>
-                    <tr>
-                        <td>성남</td>
-                        <td>성남성남성남</td>
-                        <td>보드게임 카페</td>
-                    </tr>
-                    <tr>
-                        <td>청주</td>
-                        <td>청주청주청주</td>
-                        <td>룸카페</td>
-                    </tr>
+                    <script>
+                        setRegion(document.getElementById('myJsonData').value, 0);
+                    </script>  
                 </tbody>
             </table>
         </div>
 
         <div class="footer">
-            <p> <%= AllFac[i] %> </p>
+
         </div>
     </body>
 </html>

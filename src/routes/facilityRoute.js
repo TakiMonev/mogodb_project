@@ -16,6 +16,35 @@ facilityRouter.get('/', async(req, res) => {
     }
 });
 
+facilityRouter.get('/:ceoName&:facilityName', async(req, res) => {
+    try {
+        const { ceoName } = req.params;
+        const { facilityName } = req.params;
+
+        let getFacility = await Facility.findOne({ fac_ceo: ceoName, fac_title: facilityName });
+        let clicked_str = getFacility.fac_clicked;
+        let clicked = Number(clicked_str);
+        ++clicked;
+
+        // 220609 업데이트
+        if (getFacility)
+        {   
+            let updateBody = {};
+            updateBody.fac_clicked = clicked;
+
+            getFacility = await Facility.findOneAndUpdate({ fac_ceo: ceoName, fac_title: facilityName }, { fac_clicked: clicked }, { new: true });
+
+            res.status(201).send({ getFacility });
+        }
+        else
+            res.send("Facility not found");
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
+})
+
 facilityRouter.post('/deleteFac', async(req, res) => {
     try {
         // const facilityName = req.body.facilityName와 동일
@@ -29,7 +58,8 @@ facilityRouter.post('/deleteFac', async(req, res) => {
 
         if (checkFacility)
         {   
-            const facility = await Facility.findOneAndDelete({ fac_title: facilityName });
+            // 220609 fac_title: facilityName -> fac_title: facilityName, fac_ceo: ceoName으로 수정
+            const facility = await Facility.findOneAndDelete({ fac_title: facilityName, fac_ceo: ceoName });
             console.log("Data Deleted");
             res.status(201).send({ facility });
         }

@@ -19,12 +19,28 @@ const ejs = require('ejs');
 mainRouter.use(express.static(__dirname));
 var facurl = "http://3.34.53.201/facility";
 
+/*
 mainRouter.get('/', async (req, res) => {
     Facility.find({}, function(err, allFac) {
         res.render(path.join(dirPath, "/index.ejs"), {
             AllFac: allFac
         })
     })
+});
+*/
+
+mainRouter.get('/', async (req, res) => {
+    try {
+        const users = await Users.find({});
+        const facility = await Facility.find({});
+        return res.render(path.join(dirPath, '/index.ejs'), {
+            AllFac: facility,
+            AllUsers: users
+        })
+    } catch(err) {
+        console.log(err);
+        return res.status(500).send({ err: err.message });
+    }
 });
 
 mainRouter.get('/login', async (req, res) => {

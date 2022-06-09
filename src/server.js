@@ -50,6 +50,7 @@ const server = async() => {
         app.use('/themes', themesRouter);
         app.use('/upload', uploadRouter);
         app.use('/img', express.static(path.join(__dirname, '/uploads')));
+        app.use('/login', express.static(path.join(__dirname, '/src/web/login_index.ejs')));
         //app.use(express.static(path.join(__dirname, 'public')));
     
         // 받는 곳

@@ -33,15 +33,16 @@ reviewRouter.post('/', async (req, res) => {
 
 reviewRouter.post('/deleteReview', async(req, res) => {
     try {
-        const { customerName } = req.body
+        const { customerName } = req.body;
+        const { resDate } = req.body;
         
         console.log("Found the customer's name : " + JSON.stringify(customerName) + "\n");
 
-        const checkCustomer = await Review.findOne({ review_mem: customerName });
+        const checkCustomer = await Review.findOne({ review_mem: customerName, review_date: resDate });
 
         if (checkCustomer)
         {   
-            const review = await Review.findOneAndDelete({ review_mem: customerName });
+            const review = await Review.findOneAndDelete({ review_mem: customerName, review_date: resDate });
             console.log("Data Deleted");
             res.status(201).send({ review });
         }
