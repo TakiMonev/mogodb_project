@@ -25,6 +25,7 @@
         <script>
             var region = 0;
             var tmptable = "";
+            var regionType = 0;
             var list = [];
             var list2 = [];
             var listp = [];
@@ -157,11 +158,28 @@
                 }
             }
 
+            function getRegion(num)
+            {
+                let findR = document.getElementById("findRegion");
+                regionType = num;
 
+                if (num == 1)
+                    findR.innerText = "서울";
+                
+                else if (num == 2)
+                    findR.innerText = "경기";
+
+                else if (num == 3)
+                    findR.innerText = "충청";
+
+                else
+                    findR.innerText = "전체";
+            }
 
             function setRegion(strText, num)
             {
                 region = num;
+                regionType = num;
                 
                 let jsonText = JSON.parse(strText);
                 var table = document.getElementById("make_region_table");
@@ -211,7 +229,7 @@
                 {
                     for (let j = 0; j < list.length; j++)
                     {
-                        if (list[j] < list[i])
+                        if (Number(list[j]) < Number(list[i]))
                         {
                             let tmp = list[j];
                             list[j] = list[i];
@@ -454,6 +472,10 @@
                     <div class="banner_commerce_layer">
                         <img height="500px" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" src="https://bl3301files.storage.live.com/y4mYgPSW2nofxnttVsgmlbdOfoplTa6hC0Fv-Qux3TNVZfzgeUXI5MBQx_8BKQA8wrhJUbyjqvwsbLoV6CqzIRXfJ1zXUSJn4vVPUsUCDLXRMbHXg5s1pyEeq5I9iOXV7L7CMmFpjQguboCLC_wmd7oOQKNlwv2NLg_lIQHteTACpFuuJ_pSOygexNJpeQhLOGX?width=940&height=446&cropmode=none"/>
                     </div>
+
+                    <div class="banner_commerce_layer">
+                        <img height="500px" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" src="https://bl3301files.storage.live.com/y4m57k2cTi-Lgs6JwTx4qDMiPj0zKb7t0ZC-sHs1ZtT3lnZj0cwFBtuPWKXn9AkAKEV41fNbT7ZZihfmSCApykvJot9yQvkOajg6PjBpjlZaxasnhYJnEYRHIx6TztmMfFuKmtAik6laymedBLgcX4ffSQn4nEryd_4KjpWRHx-GqeKqyyQTMjjFKuvtRSVlrn5?width=1111&height=600&cropmode=none"/>
+                    </div>
                 </div>
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 banner_side">
                     <div class="banner_button_layer">
@@ -497,12 +519,12 @@
             <h3>지역 선택</h3>
             <ul class="nav navbar-nav default">
                 <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">전체 <b class="caret"></b></a>
+                <a id="findRegion" href="#" class="dropdown-toggle" data-toggle="dropdown">전체<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 0)">전체</a></li>
-                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 1)">서울</a></li>
-                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 2)">경기</a></li>
-                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 3)">청주</a></li>
+                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 0), getRegion(0)">전체</a></li>
+                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 1), getRegion(1)">서울</a></li>
+                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 2), getRegion(2)">경기</a></li>
+                    <li><a onclick="setRegion(document.getElementById('myJsonData').value, 3), getRegion(3)">충청</a></li>
                 </ul>
                 </li>
             </ul>

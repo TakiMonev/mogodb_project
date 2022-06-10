@@ -25,6 +25,10 @@
         <script>
             var region = 0;
             var tmptable = "";
+            var list = [];
+            var list2 = [];
+            var listp = [];
+            var topc = [];
 
             function getCookie(cookie_name) {
                 var x, y;
@@ -42,7 +46,7 @@
             function loginArea(strText)
             {
                 var la = document.getElementById('login_area');
-                var jsonText = JSON.parse(strText);
+                let jsonText = JSON.parse(strText);
 
                 for (let i = 0; i < jsonText.length; i++)
                 {
@@ -77,7 +81,7 @@
                         currentIndex = index;
                 }
                 });
-        
+
                 var newIndex = 0;
                 
                 if(currentIndex <= 0) {
@@ -153,11 +157,13 @@
                 }
             }
 
+
+
             function setRegion(strText, num)
             {
                 region = num;
                 
-                var jsonText = JSON.parse(strText);
+                let jsonText = JSON.parse(strText);
                 var table = document.getElementById("make_region_table");
                 table.innerHTML = "";
 
@@ -179,6 +185,88 @@
                     {
                         table.innerHTML += "<tr><td>충청</td><td>" + jsonText[i].fac_ceo + "</td>" + tmptable + "</tr>";
                     }
+                }
+            }
+
+            function TopContentFunc(strText, idx)
+            {
+                let jsonText = JSON.parse(strText);
+                let sorted = new Array(jsonText.length);
+                let original;
+                let type;
+                
+                list = [];
+                list2 = [];
+                listp = [];
+                topc = [];
+                
+                for (let i = 0; i < jsonText.length; i++)
+                {
+                    list[i] = jsonText[i].fac_clicked;
+                    list2[i] = jsonText[i].fac_title;
+                    listp[i] = jsonText[i].fac_p;
+                }
+                
+                for (let i = 0; i < list.length; i++)
+                {
+                    for (let j = 0; j < list.length; j++)
+                    {
+                        if (list[j] < list[i])
+                        {
+                            let tmp = list[j];
+                            list[j] = list[i];
+                            list[i] = tmp;
+
+                            let tmp2 = list2[j];
+                            list2[j] = list2[i];
+                            list2[i] = tmp2;
+
+                            let tmp3 = listp[j];
+                            listp[j] = listp[i];
+                            listp[i] = tmp3;
+                        }
+                    }
+                }
+
+                original = parseInt(listp[idx]);
+                type = parseInt(original % 1000 / 100);
+
+                let nowint;
+
+                if (idx == 0)
+                    nowint = 1;
+                else if (idx == 1)
+                    nowint = 2;
+                else
+                    nowint = 3;
+
+                let nowstr = "TOP" + nowint;
+                let nowtop = document.getElementById(nowstr);
+                nowtop.innerHTML = "";
+
+                if (type == 0)
+                    topurl = "https://bl3301files.storage.live.com/y4mObPpTnukr8rNoxBO5gEDBSCZ_BPDWTQpubbgQDiXYGA0DCLcjkhdTsjnpkdsk112e1EAA-N3flicCtuEJwzz8P6UfdhGXhVAz5dEWsp3eN2mJefeuoC-0sRGKvc2YQAt2NR4pDi-zTws2hdPTL-h0YRag2zywh75gijNHPbbL5FzYzZWMGeozP_lZSx1jkYw?width=567&height=490&cropmode=none";
+
+                else if (type == 1)
+                    topurl = "https://bl3301files.storage.live.com/y4mDD_TTLtdt-T9vvTymVo9wtFTphjb6PIzaymIRgS7odB43uztv3Ej_uwiC2k3V_E5pA57_5Lzzaz7pcopTBGe6t3pDyFc7DcuNJU-bSIPllFar4UtTaOUgszuVYwWjAmKzSiiGNYA_7s1kL_qItG59Bq1mtavH_Jh3BUW57fltubIkI4wrJ-yv2vmjuPYaJ7E?width=671&height=622&cropmode=none";
+
+                else if (type == 2)
+                    topurl = "https://bl3301files.storage.live.com/y4mD1Y0CIrZiwVmcT7NRHV3_CWcWHK3_M84crk2tJTXWhvG0_528N04w4XXjrL3EFKlxYfBwukIK4-KfWIUHaPg2GW3wOygXw5YPcujWk7eJKaX18V0L5y4J0cr-Pb0OJyTZW9NL2KX0eaHzh4SC1898YE_hlZbIypLfO8MQ1zMU4_ZkIOZD3ZdK4eixvY6e-rF?width=618&height=607&cropmode=none";
+
+                else if (type == 3)
+                    topurl = "https://bl3301files.storage.live.com/y4mpqRcxESlYSb3XSWRtCh0ouCKaAc6HBnCq7l20XftZgM6cp1OBiT06TDLCZnF0e1g-qgdMyXoXIP7d5VLqpwmBO0iuNSggZsFDOd9ob47Ep-1Jl0veXcJ5LtxClzW66cl5h8fSzxH-2BZ9HBxgc48YW4Grx7whZWZdJwZYI2Zh3zKFfr_Slh2Ayhu6lYZVlQw?width=887&height=685&cropmode=none";
+
+                else if (type == 4)
+                    topurl = "https://bl3301files.storage.live.com/y4mwOKR5DH6vsk-UL0daz9qZ_qjX1F67glfp48XXHp-hW7imnFTnStSOy7FY04a1687gtqe5aGZ6nyhD96-dRsq4mlY98rQWIkq-qqMi4kMDXGii4ZagsTnlENm_oXwRGJScvoa0CRWBYRmwpDw8ptRnVHSdho50X3_is0USNm_DVFBoQcJjYZf9jCENc5WNfre?width=512&height=502&cropmode=none";
+
+                else
+                    topurl = "https://bl3301files.storage.live.com/y4mi51vOciQBR68AUcEkmeW_aYDCxDF9p_TqjaUwFbEJ673fpBBYYBb6siPBh5vujcOoDyAcMeoIYMULz39iKAIljLzxpKx2oz2nvdjhLKYWW8dYGvvDzgMb_Oq8CJKHgbhubuYAfMC0TbRY-KP3HRt02eLlZk3__12XM3LzgN0-4Ml_ptveZX6519PU0ObwH1p?width=330&height=220&cropmode=none";
+                      
+                if (Number(topurl.length))
+                {
+                    let tmpliststr = "'" + list2[idx] + "'";
+                    nowtop.innerHTML = "<img src=" + topurl + " class='img-circle member' width='120' height='120'/><p></p>"
+                    + "<div id=TOP>"+ list2[idx] + " </div>";
                 }
             }
         </script>
@@ -378,28 +466,25 @@
         <div class="container-fluid text-center best">
             <div class="row">
                 <!-- <div class="col-xs-12 col-sm-6 col-md-7 col-lg-12" style="background-color:red;"> -->
-                <script>
-                    TopContentFunc();
-                </script>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
-                    <div class="best_content_layer">
-                        <img src="https://bl3301files.storage.live.com/y4mxgd-vAQOrTSMAd6l4R_cd6aTddqyRsmYIAnpnL1zrLyHUcLsPBlNV-cd4xqGbuOwQCt_FqjDtQFfq0diJkabE6dVUHe9xuQD1A8awDS9P9wKg9o-bA_788gBrIbpmxYjgBCgHKO26LUSYmADUyAcKLg9juOxSirVEvTBZWfAyhv3qGPoweSFYdbFCaqusUXI?width=722&height=710&cropmode=none" class = "img-circle member" width="120" height="120" data-target="#TOP1"/>
-                        <p></p>
-                        <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
+                    <div class="best_content_layer" id="TOP1">
+                        <script>
+                            TopContentFunc(document.getElementById('myJsonData').value, 0);
+                        </script>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
-                    <div class="best_content_layer">
-                        <img src="https://bl3301files.storage.live.com/y4mxgd-vAQOrTSMAd6l4R_cd6aTddqyRsmYIAnpnL1zrLyHUcLsPBlNV-cd4xqGbuOwQCt_FqjDtQFfq0diJkabE6dVUHe9xuQD1A8awDS9P9wKg9o-bA_788gBrIbpmxYjgBCgHKO26LUSYmADUyAcKLg9juOxSirVEvTBZWfAyhv3qGPoweSFYdbFCaqusUXI?width=722&height=710&cropmode=none" class = "img-circle member" width="120" height="120" data-toggle="collapse"/>
-                        <p></p>
-                        <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
+                    <div class="best_content_layer" id="TOP2">
+                        <script>
+                            TopContentFunc(document.getElementById('myJsonData').value, 1);
+                        </script>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 best_content_box">
-                    <div class="best_content_layer">
-                        <img src="https://bl3301files.storage.live.com/y4mxgd-vAQOrTSMAd6l4R_cd6aTddqyRsmYIAnpnL1zrLyHUcLsPBlNV-cd4xqGbuOwQCt_FqjDtQFfq0diJkabE6dVUHe9xuQD1A8awDS9P9wKg9o-bA_788gBrIbpmxYjgBCgHKO26LUSYmADUyAcKLg9juOxSirVEvTBZWfAyhv3qGPoweSFYdbFCaqusUXI?width=722&height=710&cropmode=none" class = "img-circle member" width="120" height="120" data-toggle="collapse"/>
-                        <p></p>
-                        <div id="TOP">This is Sample This is Sample This is Sample This is Sample This is Sample This is Sample</div>
+                    <div class="best_content_layer" id="TOP3">
+                        <script>
+                            TopContentFunc(document.getElementById('myJsonData').value, 2);
+                        </script>    
                     </div>
                 </div>
             </div>
