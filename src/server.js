@@ -41,6 +41,8 @@ const server = async() => {
         // 미들웨어
         app.use(express.json());
         app.use('/', mainRouter);
+        app.use('/login', mainRouter);
+        app.use('/reserved', mainRouter);
 
         app.use('/user', userRouter);
         app.use('/blog', blogRouter);
@@ -50,7 +52,7 @@ const server = async() => {
         app.use('/themes', themesRouter);
         app.use('/upload', uploadRouter);
         app.use('/img', express.static(path.join(__dirname, '/uploads')));
-        app.use('/login', express.static(path.join(__dirname, '/src/web/login_index.ejs')));
+        //app.use('/login', express.static(path.join(__dirname, '/src/web/login_index.ejs')));
         //app.use(express.static(path.join(__dirname, 'public')));
     
         // 받는 곳

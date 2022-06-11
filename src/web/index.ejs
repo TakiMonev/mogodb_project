@@ -31,6 +31,13 @@
             var listp = [];
             var topc = [];
 
+            function setCookie(cookie_name, value, days) {
+                var exdate = new Date();
+                exdate.setDate(exdate.getDate() + days);
+                var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
+                document.cookie = cookie_name + '=' + cookie_value;
+            }
+
             function getCookie(cookie_name) {
                 var x, y;
                 var val = document.cookie.split(';');
@@ -51,18 +58,15 @@
 
                 for (let i = 0; i < jsonText.length; i++)
                 {
-                    if (!document.getCookie)
-                        break;
-
-                    if (jsonText[i].mem_id.equals(document.getCookie))
+                    if (jsonText[i].mem_id == getCookie("ID"))
                     {    
-                        la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201'>로그아웃</button>" +
-                        "<button type='button' class='btn btn-info' style='margin-left: 10px' location.href='http://3.34.53.201'>MY</button>"
+                        la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info'>로그아웃</button>" +
+                        "<button type='button' class='btn btn-info' onclick=location.href='http://3.34.53.201/reserved' style='margin-left: 10px' location.href='http://3.34.53.201'>MY</button>"
                         return;
                     }
                 }
 
-                la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201/login'>로그인</button>" + 
+                la.innerHTML="<button type='button' onclick=location.href='http://3.34.53.201/login' style='margin-left: 10px' class='btn btn-info'>로그인</button>" + 
                 "<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201'>회원가입</button>"  
                 return;              
             }
@@ -327,7 +331,6 @@
             {
                 width: 100%;
                 height: 300px;
-                background-color: aqua;
             }
 
             .best_content_box

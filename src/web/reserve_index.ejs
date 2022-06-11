@@ -35,6 +35,67 @@
         margin-left: 100px;
         margin-right: 100px;
       }
+      .header {
+          width: 100%;
+          height: 50px;
+          background-color: #efefef;
+      }
+
+      img.logo_img {
+          width: 40px;
+          height: 40px;
+          display: inline-block;
+          padding: 5px;
+      }
+
+      .login {
+          position: relative;
+          float: right;
+          margin: 15px;
+      }
+
+      * {
+          list-style: none;
+          text-decoration: none;
+          border-collapse: collapse;
+          margin: 0px;
+          padding: 0px;
+          color: black;
+      } 
+
+      td {
+          height: 200px;
+          text-align: center;
+      }
+
+      th {
+          text-align: center;
+          height: 20px;
+      }
+
+      .navbar .navbar-header {
+          float: none;
+      }
+
+      .navbar .navbar-toggle {
+          display: block;
+      }
+
+      .navbar .navbar-collapse.collapse {
+          display: none!important;
+      }
+
+      .navbar .navbar-nav {
+          float: none!important;
+      }
+
+      .navbar .navbar-nav > li {
+          float: none;
+      }
+
+      .navbar .navbar-collapse.collapse.in {
+          display: block !important;
+      }
     </style>
     <script>
 
@@ -42,7 +103,7 @@
     ///////////////  MAKE INFO  ///////////////////////////
     ///////////////////////////////////////////////////////
       //input theme
-      const theme = new Array("Erase","theme1","theme2","theme3");
+      const theme = new Array("all","theme1","theme2","theme3");
       //table data
       const data = new Array(theme.length);
       // bar chart data
@@ -173,11 +234,10 @@
         $(".table_area").empty();
         $("#graph_area1").empty();
         $("#graph_area2").empty();
-        $("#view_theme").empty();
 
         // default color_theme is fancy blue
         //we have 4 color theme so use $4
-        //0 is default (fancy blue) 1 is red 2 is green 4 is]
+        //0 is default (fancy blue) 1 is red 2 is green 4 is
         var color_index = index%4;
         if(color_index == 1){
           //dark red
@@ -192,27 +252,19 @@
           color_theme= 'FF8C32'
         }
         generate_data();
+        drawChart_info(index);
+        drawSave(index);
+        movepage();
 
-
-        if(index==0){
-          document.getElementById("view_theme").innerHTML="";
-          $("#slide_down").scrollIntoView({behavior: 'smooth'});
-        }else{
-          drawChart_info(index);
-          drawSave(index);
-          document.getElementById("view_theme").innerHTML='Total : '+data[index].length;
-          var table = new Array();
-          for(var i=0;i<data[index].length;i++){
-            table[i] = '<tr><th scope="row">'+data[index][i][0]+'</th><td>'+data[index][i][1]+'</td><td>'+data[index][i][2]+'</td><td>'+data[index][i][3]+'</td></tr>'
-          }
-         for(let k=0;k<data[index].length;k++){
-           document.getElementsByClassName("table_area")[k].innerHTML=table[k];
-         }
-         movepage();
+        document.getElementById("view_theme").innerHTML='Total : '+data[index].length;
+        var table = new Array();
+        for(var i=0;i<data[index].length;i++){
+          table[i] = '<tr><th scope="row">'+data[index][i][0]+'</th><td>'+data[index][i][1]+'</td><td>'+data[index][i][2]+'</td><td>'+data[index][i][3]+'</td></tr>'
         }
-
+       for(let k=0;k<data[index].length;k++){
+         document.getElementsByClassName("table_area")[k].innerHTML=table[k];
+       }
       }
-
       /////////////////////////////////////////////////////////
       ///////////////  CHART AREA  ////////////////////////////
       /////////////////////////////////////////////////////////
@@ -281,14 +333,59 @@
           var chart = new google.visualization.LineChart(document.getElementById('graph_area2'));
           chart.draw(data, options);
         }
+
+        function setCookie(cookie_name, value, days) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + days);
+            var cookie_value = escape(value) + ((days == null) ? '' : '; expires=' + exdate.toUTCString());
+            document.cookie = cookie_name + '=' + cookie_value;
+        }
+
+        function getCookie(cookie_name) {
+            var x, y;
+            var val = document.cookie.split(';');
+            for (var i = 0; i < val.length; i++) {
+                x = val[i].substr(0, val[i].indexOf('='));
+                y = val[i].substr(val[i].indexOf('=') + 1);
+                x = x.replace(/^\s+|\s+$/g, '');
+                if (x == cookie_name) {
+                    return unescape(y);
+                }
+            }
+        }
+
+        function loginArea(strText)
+        {
+          window.alert(getCookie("ID"));
+            var la = document.getElementById('login_area');
+            let jsonText = JSON.parse(strText);
+
+            for (let i = 0; i < jsonText.length; i++)
+            {
+                if (jsonText[i].mem_id == getCookie("ID"))
+                {    
+                    la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info'>로그아웃</button>" +
+                    "<button type='button' class='btn btn-info' onclick=location.href='http://3.34.53.201' style='margin-left: 10px' location.href='http://3.34.53.201'>MY</button>"
+                    return;
+                }
+            }
+
+            la.innerHTML="<button type='button' onclick=location.href='http://3.34.53.201/login' style='margin-left: 10px' class='btn btn-info'>로그인</button>" + 
+            "<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201'>회원가입</button>"  
+            return;              
+        }
     </script>
   </head>
 
   <body>
+    <input type="hidden" id="myFacility" value="<%= JSON.stringify(AllFac) %>" />
+    <input type="hidden" id="myThemes" value="<%= JSON.stringify(AllThemes) %>" />
+    <input type="hidden" id="myUserData" value="<%= JSON.stringify(AllUsers) %>" />
+
     <div class="outer_layout">
       <div class="container-fluid" style="margin-top: 8px; min-width:1080px;">
         <nav class="navbar">
-          <a class="navbar-brand" href="#">JoinUs</a>
+          <a class="navbar-brand" href="http://3.34.53.201">나가기</a>
         </nav>
       </div>
       <div class="container-fluid shadow" style="min-width:1080px;">
@@ -314,13 +411,15 @@
           </div></div>
         </div>
       </div>
-      <div class="container-fluid shadow" style="min-width:1080px; margin-top:20px;">
+      <div class="container-fluid shadow" style="min-width:1080px;">
         <!-- left section content -->
         <div class="row">
-          <div class="col-sm-6"  style = " margin-top : 100px; margin-bottom: 50px; float:left;">
-            <h2 id = "view_start">예약 현황</h2><h2 id = "view_theme"></h2>
-            <script>
-            </script>
+          <div class="col-sm-6"  style = " margin-top : 150px; margin-bottom: 50px; float:left;">
+            <h2 id = "view_start">예약 현황</h2><h2 id = "view_theme">
+              <script>
+                //document.write("hello");
+              </script>
+            </h2>
             <table class="table table-striped table-hover">
               <thead class = "thead-dark"> <tr> <th scope="col">예약시간</th> <th scope="col">예약인원</th> <th scope="col">예약자 이름</th> <th scope="col">예약자 정보</th> </tr> </thead>
               <script>
@@ -331,18 +430,17 @@
             </table>
           </div>
           <!-- right section content -->
-          <div class="col-sm-6 "style = "float:left; margin-top: 100px; margin-bottom: 50px;">
+          <div class="col-sm-6 "style = "float:left; margin-top: 150px; margin-bottom: 50px;">
             <div style = "min-width: 400px; width : 45%; float:left;">
-
-              <div id="graph_area1" class = "area  action_slow" style = "margin-left: 60px;  float:left;"></div>
+              <div id="graph_area1" class = "area" style = "margin-left: 60px;  float:left;"></div>
             </div>
             <div style = "width : 45%; float:left;">
-
               <div id="graph_area2" class= "area" style = "float:left; "></div>
             </div>
           </div>
         </div>
       </div>
+
       <!--fin of outer layout if add outer move right-->
     </div>
     <!--fin of body-->
