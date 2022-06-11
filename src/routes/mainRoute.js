@@ -8,7 +8,6 @@ const { Users } = require('../models/Users')
 const http = require('http');
 const fs = require('fs'); 
 var path = require('path');
-var MongoClient = require('mongodb').MongoClient;
 
 const dirPath = path.join(__dirname, '../web');
 const express = require('express');
@@ -18,7 +17,6 @@ const ejs = require('ejs');
 const { Themes } = require('../models/Themes');
 
 mainRouter.use(express.static(__dirname));
-var facurl = "http://3.34.53.201/facility";
 
 /*
 mainRouter.get('/', async (req, res) => {
@@ -70,7 +68,7 @@ mainRouter.get('/reserved', async (req, res) => {
         console.log(err);
         return res.status(500).send({ err: err.message })
     }
-})
+});
 
 module.exports = {
     mainRouter
