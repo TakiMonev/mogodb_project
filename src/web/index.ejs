@@ -61,12 +61,12 @@
                     if (jsonText[i].mem_id == getCookie("ID"))
                     {    
                         la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info'>로그아웃</button>" +
-                        "<button type='button' class='btn btn-info' onclick=location.href='http://localhost:3000/reserved' style='margin-left: 10px'>MY</button>"
+                        "<button type='button' class='btn btn-info' onclick=location.href='http://www.joins.ga/reserved' style='margin-left: 10px'>MY</button>"
                         return;
                     }
                 }
 
-                la.innerHTML="<button type='button' onclick=location.href='http://localhost:3000/login' style='margin-left: 10px' class='btn btn-info'>로그인</button>" + 
+                la.innerHTML="<button type='button' onclick=location.href='http://www.joins.ga/login' style='margin-left: 10px' class='btn btn-info'>로그인</button>" + 
                 "<button type='button' style='margin-left: 10px' class='btn btn-info' location.href='http://3.34.53.201'>회원가입</button>"  
                 return;              
             }
@@ -192,7 +192,7 @@
                 for (let i = 0; i < jsonText.length; i++)
                 {
                     setFacType(jsonText[i].fac_p);
-                    let goURL = 'http://localhost:3000/facility/' + jsonText[i].fac_ceo + '&' + jsonText[i].fac_title;
+                    let goURL = 'http://www.joins.ga/facility/' + jsonText[i].fac_ceo + '&' + jsonText[i].fac_title;
 
                     if (jsonText[i].fac_p >= 1000 && jsonText[i].fac_p < 2000 && (region == 0 || region == 1))
                     {   
