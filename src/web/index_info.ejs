@@ -162,6 +162,46 @@
         return;              
     }
 
+    function MainInfo()
+    {
+        facData = document.getElementById('myJsonData').value;
+        facJson = JSON.parse(facData);
+        let mainInfo = document.getElementById("mainInfo");
+        mainInfo.innerHTML = "";
+
+        let facName = decodeURI(document.location.href.split('&')[1]);
+
+        for (let i = 0; i < facJson.length; i++)
+        {
+            if (facName === facJson[i].fac_title)
+            {
+                mainInfo.innerHTML = "<h1>" + facJson[i].fac_title + "</h1>";
+                let type = parseInt(facJson[i].fac_p % 1000 / 100);
+
+                if (type == 0)
+                    topurl = "https://bl3301files.storage.live.com/y4mObPpTnukr8rNoxBO5gEDBSCZ_BPDWTQpubbgQDiXYGA0DCLcjkhdTsjnpkdsk112e1EAA-N3flicCtuEJwzz8P6UfdhGXhVAz5dEWsp3eN2mJefeuoC-0sRGKvc2YQAt2NR4pDi-zTws2hdPTL-h0YRag2zywh75gijNHPbbL5FzYzZWMGeozP_lZSx1jkYw?width=567&height=490&cropmode=none";
+
+                else if (type == 1)
+                    topurl = "https://bl3301files.storage.live.com/y4mDD_TTLtdt-T9vvTymVo9wtFTphjb6PIzaymIRgS7odB43uztv3Ej_uwiC2k3V_E5pA57_5Lzzaz7pcopTBGe6t3pDyFc7DcuNJU-bSIPllFar4UtTaOUgszuVYwWjAmKzSiiGNYA_7s1kL_qItG59Bq1mtavH_Jh3BUW57fltubIkI4wrJ-yv2vmjuPYaJ7E?width=671&height=622&cropmode=none";
+
+                else if (type == 2)
+                    topurl = "https://bl3301files.storage.live.com/y4mD1Y0CIrZiwVmcT7NRHV3_CWcWHK3_M84crk2tJTXWhvG0_528N04w4XXjrL3EFKlxYfBwukIK4-KfWIUHaPg2GW3wOygXw5YPcujWk7eJKaX18V0L5y4J0cr-Pb0OJyTZW9NL2KX0eaHzh4SC1898YE_hlZbIypLfO8MQ1zMU4_ZkIOZD3ZdK4eixvY6e-rF?width=618&height=607&cropmode=none";
+
+                else if (type == 3)
+                    topurl = "https://bl3301files.storage.live.com/y4mpqRcxESlYSb3XSWRtCh0ouCKaAc6HBnCq7l20XftZgM6cp1OBiT06TDLCZnF0e1g-qgdMyXoXIP7d5VLqpwmBO0iuNSggZsFDOd9ob47Ep-1Jl0veXcJ5LtxClzW66cl5h8fSzxH-2BZ9HBxgc48YW4Grx7whZWZdJwZYI2Zh3zKFfr_Slh2Ayhu6lYZVlQw?width=887&height=685&cropmode=none";
+
+                else if (type == 4)
+                    topurl = "https://bl3301files.storage.live.com/y4mwOKR5DH6vsk-UL0daz9qZ_qjX1F67glfp48XXHp-hW7imnFTnStSOy7FY04a1687gtqe5aGZ6nyhD96-dRsq4mlY98rQWIkq-qqMi4kMDXGii4ZagsTnlENm_oXwRGJScvoa0CRWBYRmwpDw8ptRnVHSdho50X3_is0USNm_DVFBoQcJjYZf9jCENc5WNfre?width=512&height=502&cropmode=none";
+
+                else
+                    topurl = "https://bl3301files.storage.live.com/y4mi51vOciQBR68AUcEkmeW_aYDCxDF9p_TqjaUwFbEJ673fpBBYYBb6siPBh5vujcOoDyAcMeoIYMULz39iKAIljLzxpKx2oz2nvdjhLKYWW8dYGvvDzgMb_Oq8CJKHgbhubuYAfMC0TbRY-KP3HRt02eLlZk3__12XM3LzgN0-4Ml_ptveZX6519PU0ObwH1p?width=330&height=220&cropmode=none";
+                    
+                mainInfo.innerHTML += "<img src=" + topurl + " class='img member' width='600' height='400'/>";
+                break;
+            }
+        }
+    }
+
     function getContent()
     {
         facData = document.getElementById('myJsonData').value;
@@ -234,56 +274,10 @@
 
       <div class="container-fluid row">
         <div class="container col-md-6 info_left row">
-          <div>
-            <h2>JoinUs Escape</h2>
-          </div>
-          <div class="col-md-5 info_text row">
-            <div style="text-align: center;" class="col-md-11 col-md-offset-1">
-              <div>
-                <p><span>도비는 자유에요</span></p>
-              </div>
-
-              <div>
-                <p>
-                  <span>이용시간</span>
-                  <span>60분</span>
-                </p>
-              </div>
-
-              <div>
-                <p>
-                  <span>분류</span>
-                  <span>방탈출</span>
-                </p>
-              </div>
-
-              <div>
-                <p>
-                  <span>활동성</span>
-                  <span>
-                    <img src="./img/many_off.png"/>
-                    <img src="./img/normal_off.png"/>
-                    <img src="./img/low_on.png"/>
-                  </span>
-                </p>
-              </div>
-
-              <div>
-                <p>
-                  <span class="tag">추천인원</span>
-                  <span>
-                    <img src="./img/2_user.jpg"/>
-                    <img src="./img/3_user.jpg"/>
-                  </span>
-                </p>
-              </div>
-              <div>
-                <button type="button" id="no_alliance_reserve" style="color:black;">예약하기</button>
-              </div>
-            </div>
-
-
-
+          <div id="mainInfo">
+            <script>
+                MainInfo();
+            </script>
           </div>
           <div class="col-md-7 info_img" style="height: 300px;"></div>
         </div>

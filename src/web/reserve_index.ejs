@@ -42,7 +42,7 @@
     ///////////////  MAKE INFO  ///////////////////////////
     ///////////////////////////////////////////////////////
       //input theme
-      const theme = [];
+      const theme = new Array("Erase","theme1","theme2","theme3");
       //table data
       const data = new Array(theme.length);
       // bar chart data
@@ -54,33 +54,112 @@
 
       //this function generate_data each array;
       function generate_data(){
-      
-        let tmpdata = [];
-        let themes = JSON.parse(document.getElementById('myThemes').value);
-        let myReview = JSON.parse(document.getElementById('myReviewData').value);
+          data[1]=new Array(
+            ["10시","3명","이정주","010-xxx-xxx"],
+            ["11시","2명","이정주2","020-xxx-xxx"],
+            ["13시","1명","이정주3","040-xxx-xxx"],
+            ["14시","3명","이정주4","050-xxx-xxx"],
+            ["15시","6명","이정주6","060-xxx-xxx"],
+            ["16시","5명","이정주7","070-xxx-xxx"],
+            ["17시","4명","이정주8","080-xxx-xxx"],
+            ["18시","4명","이정주10","080-xxx-xxx"],
+            ["19시","1명","이정주1","080-xxx-xxx"],
+            ["21시","4명","이정주9","080-xxx-xxx"]
 
-        let jsonReview = myReview;
-        let ppl = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+          )
+          data[2]=new Array(
+            ["10시","5명","이상윤","010-xxx-xxx"],
+            ["11시","9명","이상윤2","020-xxx-xxx"],
+            ["12시","1명","이상윤3","030-xxx-xxx"],
+            ["13시","2명","이상윤4","040-xxx-xxx"],
+            ["14시","4명","이상윤5","050-xxx-xxx"],
+            ["15시","4명","이상윤6","060-xxx-xxx"],
+            ["16시","3명","이상윤7","070-xxx-xxx"],
+            ["17시","7명","이상윤8","080-xxx-xxx"],
+            ["18시","7명","이상윤8","080-xxx-xxx"],
+            ["19시","8명","이상윤8","080-xxx-xxx"],
+            ["20시","4명","이주8","080-xxx-xxx"],
+            ["21시","1명","이상윤9","080-xxx-xxx"]
 
-        data[0] = new Array(myReview.length);
-        for (let k = 1; k <= themes.length; k++)
-        {
-          data[k] = new Array(myReview.length);
-          tmpdata = [];
-          for (let i = 0; i < myReview.length; i++)
-          {
-            let strTime = jsonReview[i].review_date;
-            let tmpInt = parseInt(parseInt(strTime) % 10000 / 100);
+          )
 
-            tmpdata[0] = tmpInt.toString();
-            ++ppl[tmpInt];
-            tmpdata[1] = ppl[tmpInt];
-            tmpdata[2] = jsonReview[i].review_mem;
-            tmpdata[3] = jsonReview[i].review_p.substr(1, 12);
+          data[3]=new Array(
+            ["10시","1명","이시헌","010-xxx-xxx"],
+            ["11시","2명","이시헌2","020-xxx-xxx"],
+            ["12시","5명","이시헌3","030-xxx-xxx"],
+            ["13시","7명","이시헌4","040-xxx-xxx"],
+            ["14시","10명","이시헌5","050-xxx-xxx"],
+            ["15시","8명","이시헌6","060-xxx-xxx"],
+            ["16시","4명","이시헌7","070-xxx-xxx"],
+            ["17시","6명","이시헌8","080-xxx-xxx"],
+            ["18시","1명","이시헌8","080-xxx-xxx"],
+            ["19시","4명","이시헌8","080-xxx-xxx"],
+            ["20시","6명","이시헌8","080-xxx-xxx"],
+            ["21시","2명","이시헌9","080-xxx-xxx"]
 
-            data[k][i] = tmpdata;
-          }
-        }
+          )
+
+          sdata[1]=new Array(
+            ["1일",12],["2일",2],["3일",3],["4일",0],
+            ["5일",8],["6일",9],["7일",12],["8일",4],
+            ["9일",5],["10일",7],["11일",6],["12일",1],
+            ["13일",8],["14일",10],["15일",4],["16일",3],
+            ["17일",0],["18일",7],["19일",9],["20일",1],
+            ["21일",2],["22일",12],["23일",10],["24일",11],
+            ["25일",11],["26일",12],["27일",8],["28일",7],
+            ["29일",6],["30일",8],["31일",2]
+          )
+          sdata[2]=new Array(
+            ["1일",12],["2일",12],["3일",10],["4일",8],
+            ["5일",10],["6일",12],["7일",10],["8일",2],
+            ["9일",5],["10일",2],["11일",4],["12일",1],
+            ["13일",0],["14일",1],["15일",2],["16일",4],
+            ["17일",4],["18일",0],["19일",12],["20일",4],
+            ["21일",2],["22일",5],["23일",5],["24일",2],
+            ["25일",2],["26일",4],["27일",2],["28일",8],
+            ["29일",3],["30일",1],["31일",3]
+          )
+          sdata[3]=new Array(
+            ["1일",12],["2일",12],["3일",8],["4일",10],
+            ["5일",5],["6일",0],["7일",1],["8일",3],
+            ["9일",3],["10일",0],["11일",0],["12일",1],
+            ["13일",2],["14일",3],["15일",11],["16일",0],
+            ["17일",1],["18일",12],["19일",1],["20일",2],
+            ["21일",10],["22일",8],["23일",7],["24일",12],
+            ["25일",12],["26일",4],["27일",2],["28일",8],
+            ["29일",6],["30일",3],["31일",2]
+          )
+
+          gdata[1] = google.visualization.arrayToDataTable([
+            ['시간', '인원수'],
+            ["10시",3],            ["11시",2],
+            ["12시",0],            ["13시",1],
+            ["14시",3],            ["15시",6],
+            ["16시",5],            ["17시",4],
+            ["18시",4],            ["19시",1],
+            ["20시",0],            ["21시",4]
+          ]);
+
+          gdata[2] = google.visualization.arrayToDataTable([
+            ['시간', '인원수'],
+            ["10시",5],            ["11시",9],
+            ["12시",1],            ["13시",2],
+            ["14시",4],            ["15시",4],
+            ["16시",3],            ["17시",7],
+            ["18시",7],            ["19시",8],
+            ["20시",4],            ["21시",1]
+          ]);
+
+          gdata[3] = google.visualization.arrayToDataTable([
+            ['시간', '인원수'],
+            ["10시",1],            ["11시",2],
+            ["12시",5],            ["13시",7],
+            ["14시",10],           ["15시",8],
+            ["16시",4],            ["17시",6],
+            ["18시",1],            ["19시",4],
+            ["20시",6],            ["21시",2]
+          ]);
+
       }
       function movepage(){
         // this function is click event move to id view_start, behavior smooth
@@ -94,10 +173,11 @@
         $(".table_area").empty();
         $("#graph_area1").empty();
         $("#graph_area2").empty();
+        $("#view_theme").empty();
 
         // default color_theme is fancy blue
         //we have 4 color theme so use $4
-        //0 is default (fancy blue) 1 is red 2 is green 4 is
+        //0 is default (fancy blue) 1 is red 2 is green 4 is]
         var color_index = index%4;
         if(color_index == 1){
           //dark red
@@ -111,21 +191,28 @@
           //orange
           color_theme= 'FF8C32'
         }
-
         generate_data();
-        drawChart_info(index);
-        drawSave(index);
-        movepage();
-        
-        document.getElementById("view_theme").innerHTML='Total : '+data[index].length;
-        var table = new Array();
-        for(var i=0;i<data[index].length;i++){
-          table[i] = '<tr><th scope="row">'+data[index][i][0]+'</th><td>'+data[index][i][1]+'</td><td>'+data[index][i][2]+'</td><td>'+data[index][i][3]+'</td></tr>'
+
+
+        if(index==0){
+          document.getElementById("view_theme").innerHTML="";
+          $("#slide_down").scrollIntoView({behavior: 'smooth'});
+        }else{
+          drawChart_info(index);
+          drawSave(index);
+          document.getElementById("view_theme").innerHTML='Total : '+data[index].length;
+          var table = new Array();
+          for(var i=0;i<data[index].length;i++){
+            table[i] = '<tr><th scope="row">'+data[index][i][0]+'</th><td>'+data[index][i][1]+'</td><td>'+data[index][i][2]+'</td><td>'+data[index][i][3]+'</td></tr>'
+          }
+         for(let k=0;k<data[index].length;k++){
+           document.getElementsByClassName("table_area")[k].innerHTML=table[k];
+         }
+         movepage();
         }
-       for(let k=0;k<data[index].length;k++){
-         document.getElementsByClassName("table_area")[k].innerHTML=table[k];
-       }
+
       }
+
       /////////////////////////////////////////////////////////
       ///////////////  CHART AREA  ////////////////////////////
       /////////////////////////////////////////////////////////
@@ -138,12 +225,11 @@
         var graph_area = document.getElementById('graph_area1');
 
         var Options = {
-          width : 380,
-          height : 380,
+          height: 300,
           colors: [color_theme],
           legend: { position: 'none' },
-          chart: {
-            title: '테마별 현황 그래프',
+          chartArea: {
+            width:'80%',
           }
         };
         function drawChart() {
@@ -165,17 +251,40 @@
           data.addColumn('number', 'X');
           data.addColumn('number','theme'+index);
 
-          
+          // make daily visit data counted
+          for(i=0;i<31;i++){
+            count = count + sdata[index][i][1];
+
+            data.addRows([
+                [i,count],
+            ]);
+          }
+          var options = {
+            //char width and height
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            height:300,
+            left : 0,
+            colors: [color_theme],
+            chartArea: {
+              width:'85%',
+            },
+            //legend position none
+            hAxis: {
+              title: '날짜'
+            },
+            series: {
+              1: {curveType: 'function'}
+            }
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('graph_area2'));
+          chart.draw(data, options);
         }
     </script>
   </head>
 
   <body>
-    <input type="hidden" id="myFacility" value="<%= JSON.stringify(AllFac) %>" />
-    <input type="hidden" id="myThemes" value="<%= JSON.stringify(AllThemes) %>" />
-    <input type="hidden" id="myUserData" value="<%= JSON.stringify(AllUsers) %>" />
-    <input type="hidden" id="myReviewData" value="<%= JSON.stringify(AllReview) %>" />
-
     <div class="outer_layout">
       <div class="container-fluid" style="margin-top: 8px; min-width:1080px;">
         <nav class="navbar">
@@ -186,15 +295,14 @@
         <div class="row">
           <div class="card-body"><div class="row">
           <script>
-            let themes = JSON.parse(document.getElementById('myThemes').value);
-            for(var i=0; i<themes.length; i++){
+            for(var i=0; i<theme.length; i++){
               document.write(
-                '<div class="col-sm-2" style = "margin-bottom: 20px;">'+
+                '<div class="col-sm-2" style = "margin-bottom: 5px;">'+
                   '<div class="border border-light card_inside rounded-circle shadow py-5">'+
                     '<div style="text-align:center">'+
                         '<div class="font-weight-bold">'+
                           '<a href="javascript:contentIndex('+i+'); javascript:get_themenum('+i+');">'+
-                          '<p style="font-size : 20px; text-align : center;">'+themes[i].theme_name+'</p>'+
+                          '<p style="padding-top: 10px; font-size : 20px; text-align : center;">'+theme[i]+'</p>'+
                           '</a>'+
                         '</div>'+
                     '</div>'+
@@ -206,16 +314,14 @@
           </div></div>
         </div>
       </div>
-      <div class="container-fluid shadow" style="min-width:1080px;">
+      <div class="container-fluid shadow" style="min-width:1080px; margin-top:20px;">
         <!-- left section content -->
         <div class="row">
-          <div class="col-sm-6"  style = " margin-top : 150px; margin-bottom: 50px; float:left;">
-            <h2 id = "view_start">예약 현황</h2><h2 id = "view_theme">
-              <script>
-                //document.write("hello");
-              </script>
-            </h2>
-            <table class="table table-striped table-hover">
+          <div class="col-sm-6"  style = " margin-top : 100px; margin-bottom: 50px; float:left;">
+            <h2 id = "view_start" style="margin-bottom:20px; margin-left: 30px;">예약 현황</h2><h2 id = "view_theme" style="margin-left: 30px;"></h2>
+            <script>
+            </script>
+            <table class="table table-striped table-hover" style="margin-left: 30px;">
               <thead class = "thead-dark"> <tr> <th scope="col">예약시간</th> <th scope="col">예약인원</th> <th scope="col">예약자 이름</th> <th scope="col">예약자 정보</th> </tr> </thead>
               <script>
                 for(var j=0;j<12;j++){
@@ -225,17 +331,18 @@
             </table>
           </div>
           <!-- right section content -->
-          <div class="col-sm-6 "style = "float:left; margin-top: 150px; margin-bottom: 50px;">
-            <div style = "min-width: 400px; width : 45%; float:left;">
-              <div id="graph_area1" class = "area" style = "margin-left: 60px;  float:left;"></div>
+          <div class="col-sm-6 "style = "float:left; margin-top: 100px; margin-bottom: 50px;">
+            <div style = "min-width: 400px; width : 100%; float:left;">
+              <h5 style="margin-top: 5px; margin-bottom:20px; margin-left: 60px;">테마별 현황 그래프</h5>
+              <div id="graph_area1" class = "area  action_slow" style = "margin-bottom:30px; margin-top:30px; margin-left: 60px; float:left;"></div>
             </div>
-            <div style = "width : 45%; float:left;">
-              <div id="graph_area2" class= "area" style = "float:left; "></div>
+            <div style = "width : 100%;  float:left;">
+              <h5 style = "margin-left: 60px;">월별 방문객 누적 그래프</h5>
+              <div id="graph_area2" class= "area" style = "float:left; margin-left: 60px;"></div>
             </div>
           </div>
         </div>
       </div>
-
       <!--fin of outer layout if add outer move right-->
     </div>
     <!--fin of body-->
