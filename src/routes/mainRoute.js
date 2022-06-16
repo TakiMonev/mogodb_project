@@ -2,7 +2,8 @@ const { Router } = require('express');
 //const facilityRouter = Router();      //mainRouter로 대체
 const mongoose = require("mongoose");
 const { Facility } = require('../models/Facility');
-const { Users } = require('../models/Users')
+const { Users } = require('../models/Users');
+const { Review }  = require('../models/Review');
 //const { Post } = require('../models/Post');
 
 const http = require('http');
@@ -59,10 +60,12 @@ mainRouter.get('/reserved', async (req, res) => {
         const users = await Users.find({});
         const facility = await Facility.find({});
         const themes = await Themes.find({});
+        const review = await Review.find({});
         return res.render(path.join(dirPath, '/reserve_index.ejs'), {
             AllUsers: users,
             AllFac: facility,
-            AllThemes: themes
+            AllThemes: themes,
+            AllReview: review
         })
     } catch(err) {
         console.log(err);

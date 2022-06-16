@@ -225,12 +225,11 @@
         var graph_area = document.getElementById('graph_area1');
 
         var Options = {
-          width : 380,
-          height : 380,
+          height: 300,
           colors: [color_theme],
           legend: { position: 'none' },
-          chart: {
-            title: '테마별 현황 그래프',
+          chartArea: {
+            width:'80%',
           }
         };
         function drawChart() {
@@ -262,16 +261,17 @@
           }
           var options = {
             //char width and height
-            title: '월별 방문객 누적 그래프',
             curveType: 'function',
             legend: { position: 'bottom' },
-            width : 500,
-            height : 350,
+            height:300,
             left : 0,
             colors: [color_theme],
+            chartArea: {
+              width:'85%',
+            },
             //legend position none
             hAxis: {
-              title: '시간'
+              title: '날짜'
             },
             series: {
               1: {curveType: 'function'}
@@ -297,12 +297,12 @@
           <script>
             for(var i=0; i<theme.length; i++){
               document.write(
-                '<div class="col-sm-2" style = "margin-bottom: 20px;">'+
+                '<div class="col-sm-2" style = "margin-bottom: 5px;">'+
                   '<div class="border border-light card_inside rounded-circle shadow py-5">'+
                     '<div style="text-align:center">'+
                         '<div class="font-weight-bold">'+
                           '<a href="javascript:contentIndex('+i+'); javascript:get_themenum('+i+');">'+
-                          '<p style="font-size : 20px; text-align : center;">'+theme[i]+'</p>'+
+                          '<p style="padding-top: 10px; font-size : 20px; text-align : center;">'+theme[i]+'</p>'+
                           '</a>'+
                         '</div>'+
                     '</div>'+
@@ -318,10 +318,10 @@
         <!-- left section content -->
         <div class="row">
           <div class="col-sm-6"  style = " margin-top : 100px; margin-bottom: 50px; float:left;">
-            <h2 id = "view_start">예약 현황</h2><h2 id = "view_theme"></h2>
+            <h2 id = "view_start" style="margin-bottom:20px; margin-left: 30px;">예약 현황</h2><h2 id = "view_theme" style="margin-left: 30px;"></h2>
             <script>
             </script>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover" style="margin-left: 30px;">
               <thead class = "thead-dark"> <tr> <th scope="col">예약시간</th> <th scope="col">예약인원</th> <th scope="col">예약자 이름</th> <th scope="col">예약자 정보</th> </tr> </thead>
               <script>
                 for(var j=0;j<12;j++){
@@ -332,13 +332,13 @@
           </div>
           <!-- right section content -->
           <div class="col-sm-6 "style = "float:left; margin-top: 100px; margin-bottom: 50px;">
-            <div style = "min-width: 400px; width : 45%; float:left;">
-
-              <div id="graph_area1" class = "area  action_slow" style = "margin-left: 60px;  float:left;"></div>
+            <div style = "min-width: 400px; width : 100%; float:left;">
+              <h5 style="margin-top: 5px; margin-bottom:20px; margin-left: 60px;">테마별 현황 그래프</h5>
+              <div id="graph_area1" class = "area  action_slow" style = "margin-bottom:30px; margin-top:30px; margin-left: 60px; float:left;"></div>
             </div>
-            <div style = "width : 45%; float:left;">
-
-              <div id="graph_area2" class= "area" style = "float:left; "></div>
+            <div style = "width : 100%;  float:left;">
+              <h5 style = "margin-left: 60px;">월별 방문객 누적 그래프</h5>
+              <div id="graph_area2" class= "area" style = "float:left; margin-left: 60px;"></div>
             </div>
           </div>
         </div>

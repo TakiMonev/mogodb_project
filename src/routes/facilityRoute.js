@@ -2,9 +2,14 @@ const express = require('express');
 const facilityRouter = express.Router();
 const mongoose = require("mongoose");
 const { Facility } = require('../models/Facility');
+const { Users } = require('../models/Users');
+const { Themes } = require('../models/Themes');
+
 const { MongoClient } = require("mongodb");
 const { MONGO_URI } = process.env;
 const client = new MongoClient(MONGO_URI);
+var path = require('path');
+const dirPath = path.join(__dirname, '../web');
 
 facilityRouter.get('/', async(req, res) => {
     try {
@@ -34,7 +39,14 @@ facilityRouter.get('/:ceoName&:facilityName', async(req, res) => {
 
             getFacility = await Facility.findOneAndUpdate({ fac_ceo: ceoName, fac_title: facilityName }, { fac_clicked: clicked }, { new: true });
 
-            res.status(201).send({ getFacility });
+            const users = await Users.find({});
+            const facility = await Facility.find({});
+            const themes = await Themes.find({});
+            return res.render(path.join(dirPath, '/index_info.ejs'), {
+                AllFac: facility,
+                AllUsers: users,
+                AllThemes: themes
+            });
         }
         else
             res.send("Facility not found");

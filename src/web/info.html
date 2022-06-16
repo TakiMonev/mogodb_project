@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="./css/nav.css" rel="stylesheet" />
+    <link href="./css/info_data.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+    <title>JoinUs</title>
+  </head>
+
+
+  <body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div class="login">
+            <button type="button" class="btn btn-info" onclick="popup()">로그인</button>
+            <button type="button" class="btn btn-info">회원가입</button>
+          </div>
+          <a class="navbar-brand" style="margin-top: 8px;" href="#">JoinUs</a>
+        </div>
+      </div>
+    </nav>
+    <script>
+      function popup() {
+        var _width = '285';
+        var _height = '400';
+        var _left = Math.ceil(( window.screen.width - _width )/2);
+        var _top = Math.ceil(( window.screen.height - _height )/2); 
+ 
+        window.open('Login.html', 'Log In', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
+      }
+    </script>
+
+    <div class="bg_col">
+
+      <div class="container-fluid row">
+        <div class="container col-md-6 info_left row">
+          <div>
+            <h2>JoinUs Escape</h2>
+          </div>
+          <div class="col-md-5 info_text row">
+            <div style="text-align: center;" class="col-md-11 col-md-offset-1">
+              <div>
+                <p><span>도비는 자유에요</span></p>
+              </div>
+
+              <div>
+                <p>
+                  <span>이용시간</span>
+                  <span>60분</span>
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  <span>분류</span>
+                  <span>방탈출</span>
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  <span>활동성</span>
+                  <span>
+                    <img src="./img/many_off.png"/>
+                    <img src="./img/normal_off.png"/>
+                    <img src="./img/low_on.png"/>
+                  </span>
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  <span class="tag">추천인원</span>
+                  <span>
+                    <img src="./img/2_user.jpg"/>
+                    <img src="./img/3_user.jpg"/>
+                  </span>
+                </p>
+              </div>
+              <div>
+                <button type="button" id="no_alliance_reserve" style="color:black;">예약하기</button>
+              </div>
+            </div>
+
+
+
+          </div>
+          <div class="col-md-7 info_img" style="height: 300px;"></div>
+        </div>
+
+        <div class="col-md-6">
+          <h2>소개</h2>
+          <div class="container-fluid info_sub">
+              <p>
+                <span>뭔가 엄청 재미있는 방탈출이 많습니다.<br>
+                  진짜 개쩔구요<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                  Lorem Ipsum<br>
+                </span>
+              </p>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="container-fluid row">
+        <div class="col-md-6">
+          <h2>위치</h2>
+          <div id="map" style="height:500px;"></div>
+          <script>
+          function myMap() {
+            var mapCanvas = document.getElementById("map");
+            var myCenter = new google.maps.LatLng	(	37.41906306	,	126.9197713	);
+            var mapOptions = {
+              center: myCenter,
+              zoom: 12
+            };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+          }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZyO-3oUwTQAogkeWwKhJz3S-dUyFrjiE&libraries=visualization&callback=myMap"></script>
+        </div>
+
+
+        <div class="col-md-6">
+          <h2>테마</h2>
+          <div class="info_theme">
+            <!-- 테마 목록 -->
+            <div class="other_theme row">
+              <div class="col-md-6 col-md-offset-3 row">
+                <img src="./img/sample.jpg" class = "info_img">
+                <div>
+                  <p><button type="button" class="btn btn-link">운영체제 | 방탈출</button></p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="other_theme row">
+              <div class="col-md-6 col-md-offset-3 row">
+                <img src="./img/sample.jpg" class = "info_img">
+                <div>
+                  <p><button type="button" class="btn btn-link">컴파일러 | 방탈출</button></p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="other_theme row">
+              <div class="col-md-6 col-md-offset-3 row">
+                <img src="./img/sample.jpg" class = "info_img">
+                <div>
+                  <p><button type="button" class="btn btn-link">객체지향설계 | 방탈출</button></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container-fluid info_theme bg_col">
+
+
+
+      <!-- 일단 토글 버튼으로 임시로 해놨음 -->
+      <div class="">
+        <input type="radio" name="r1" value ="admin" onclick="mytoggle(event)"/>admin
+        <input type="radio" name="r1" value ="user" onclick="mytoggle(event)" checked="checked"/>user
+      </div>
+      <script>
+      $(document).ready(function() {});
+      function mytoggle(event) {
+        if(event.target.value == "admin") {
+          $(".theme_add").css("display", "block");
+        }
+        if(event.target.value == "user") {
+          $(".theme_add").css("display", "none");
+        }
+      }
+      </script>
+
+
+
+      <!-- 테마 추가하는 파트 -->
+      <div class="theme_add row">
+        <div class="col-md-6 col-md-offset-3">
+          <h2>Add Theme</h2>
+          <form class="row">
+            <div class="form-group col-sm-4">
+              <label for="th_name">name: </label>
+              <input type="text" class="form-control" id="th_name">
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="th_type">type: </label>
+              <input type="text" class="form-control" id="th_type">
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="th_img">upload img file</label>
+              <input type="file" class="form-control" id="th_img" accept="image/*">
+            </div>
+            <div class="form-group col-sm-2 col-sm-offset-10">
+              <button type="submit" class="btn btn-primary" id="add_submit">테마 추가</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>
