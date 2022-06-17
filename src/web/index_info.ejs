@@ -345,8 +345,6 @@
         let allppl = document.getElementById("myUserData").value;
         let jsonAll = JSON.parse(allppl);
 
-        window.alert(jsonAll.length);
-
         for (let i = 0; i < jsonAll.length; i++)
         {
             if (jsonAll[i].mem_id === getCookie("ID"))
@@ -360,29 +358,30 @@
       </script>
 
       <!-- 테마 추가하는 파트 -->
-      <div class="theme_add row" id="addTheme">
+      <!--
+      <div id="addTheme">
         <div class="col-md-6 col-md-offset-3">
           <h2>Add Theme</h2>
           <form class="row">
             <div class="form-group col-sm-4">
-                <label for="th_p">theme_key: </label>
-                <input type="text" class="form-control" id="th_p">
+                <label for="theme_p">Key: </label>
+                <input type="text" class="form-control" id="theme_p">
             </div>
             <div class="form-group col-sm-4">
-              <label for="th_name">name: </label>
-              <input type="text" class="form-control" id="th_name">
+              <label for="theme_owner">관리자 이름: </label>
+              <input type="text" class="form-control" id="th_owner">
             </div>
             <div class="form-group col-sm-4">
-              <label for="th_title">type: </label>
-              <input type="text" class="form-control" id="th_title">
+              <label for="theme_title">시설 이름: </label>
+              <input type="text" class="form-control" id="theme_title">
             </div>
             <div class="form-group col-sm-4">
-              <label for="th_con">contents: </label>
-              <input type="text" class="form-control" id="th_con">
+              <label for="theme_con">내용: </label>
+              <input type="text" class="form-control" id="theme_con">
             </div>
             <div class="form-group col-sm-4">
-                <label for="th_name">Theme name: </label>
-                <input type="text" class="form-control" id="th_name">
+                <label for="theme_name">테마명: </label>
+                <input type="text" class="form-control" id="theme_name">
               </div>
             <div class="form-group col-sm-2 col-sm-offset-10">
               <button type="submit" class="btn btn-primary" id="add_submit">테마 추가</button>
@@ -393,6 +392,7 @@
           </form>
         </div>
       </div>
+      -->
     </div>
 
   </body>
