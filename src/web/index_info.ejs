@@ -141,6 +141,11 @@
             }
         }
     }
+  
+    function logOut() {
+            document.getCookie = setCookie("ID", 0, 0);
+            window.location.href='http://www.joins.ga/';
+        }
 
     function loginArea(strText)
     {
@@ -151,7 +156,7 @@
         {
             if (jsonText[i].mem_id == getCookie("ID"))
             {    
-                la.innerHTML="<button type='button' style='margin-left: 10px' class='btn btn-info'>로그아웃</button>" +
+                la.innerHTML="<button type='button' onclick=logOut() style='margin-left: 10px' class='btn btn-info'>로그아웃</button>" +
                 "<button type='button' class='btn btn-info' onclick=location.href='http://www.joins.ga/reserved' style='margin-left: 10px'>MY</button>"
                 return;
             }
@@ -335,48 +340,56 @@
     </div>
 
     <div class="container-fluid info_theme bg_col">
-
-
-
-      <!-- 일단 토글 버튼으로 임시로 해놨음 -->
-      <div class="">
-        <input type="radio" name="r1" value ="admin" onclick="mytoggle(event)"/>admin
-        <input type="radio" name="r1" value ="user" onclick="mytoggle(event)" checked="checked"/>user
-      </div>
+        
       <script>
-      $(document).ready(function() {});
-      function mytoggle(event) {
-        if(event.target.value == "admin") {
-          $(".theme_add").css("display", "block");
+        let allppl = document.getElementById("myUserData").value;
+        let jsonAll = JSON.parse(allppl);
+
+        window.alert(jsonAll.length);
+
+        for (let i = 0; i < jsonAll.length; i++)
+        {
+            if (jsonAll[i].mem_id === getCookie("ID"))
+            {
+                let AddTheme = document.getElementById("addTheme");
+                AddTheme.type = "visible";
+                return;
+            }
         }
-        if(event.target.value == "user") {
-          $(".theme_add").css("display", "none");
-        }
-      }
+        //AddTheme.type = "hidden";
       </script>
 
-
-
       <!-- 테마 추가하는 파트 -->
-      <div class="theme_add row">
+      <div class="theme_add row" id="addTheme">
         <div class="col-md-6 col-md-offset-3">
           <h2>Add Theme</h2>
           <form class="row">
+            <div class="form-group col-sm-4">
+                <label for="th_p">theme_key: </label>
+                <input type="text" class="form-control" id="th_p">
+            </div>
             <div class="form-group col-sm-4">
               <label for="th_name">name: </label>
               <input type="text" class="form-control" id="th_name">
             </div>
             <div class="form-group col-sm-4">
-              <label for="th_type">type: </label>
-              <input type="text" class="form-control" id="th_type">
+              <label for="th_title">type: </label>
+              <input type="text" class="form-control" id="th_title">
             </div>
             <div class="form-group col-sm-4">
-              <label for="th_img">upload img file</label>
-              <input type="file" class="form-control" id="th_img" accept="image/*">
+              <label for="th_con">contents: </label>
+              <input type="text" class="form-control" id="th_con">
             </div>
+            <div class="form-group col-sm-4">
+                <label for="th_name">Theme name: </label>
+                <input type="text" class="form-control" id="th_name">
+              </div>
             <div class="form-group col-sm-2 col-sm-offset-10">
               <button type="submit" class="btn btn-primary" id="add_submit">테마 추가</button>
             </div>
+            <script>
+                
+            </script>
           </form>
         </div>
       </div>
