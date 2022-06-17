@@ -16,9 +16,6 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-var exec = require('child_process').exec;
-exec('npm run dev', {windowsHide: true});
-
 app.set('view engine', 'ejs');
 
 // const users = [];
